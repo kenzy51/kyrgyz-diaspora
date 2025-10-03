@@ -1,7 +1,7 @@
-import { ReactNode } from "react";
+import React from "react";
 
 type ContainerProps = {
-  children: ReactNode;
+  children: React.ReactNode;
   className?: string;
 };
 
