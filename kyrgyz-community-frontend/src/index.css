@@ -2,3 +2,12 @@
 body {
   font-family: "Raleway", sans-serif;
 }
+
+#nprogress .bar {
+  background: #dc2626 !important; /* red-600 */
+  height: 3px;
+}
+
+#nprogress .peg {
+  box-shadow: 0 0 10px #dc2626, 0 0 5px #dc2626;
+}

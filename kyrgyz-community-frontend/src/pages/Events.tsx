@@ -28,6 +28,14 @@ const events = [
     image:
       "https://upload.wikimedia.org/wikipedia/commons/6/68/Kairat_Zhyrgalbek_Uulu_20191601.jpg",
   },
+  {
+    title: "Football Tournament",
+    date: "July 10, 2025",
+    location: "Philadelphia",
+    city: "Pensilvania",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/6/68/Kairat_Zhyrgalbek_Uulu_20191601.jpg",
+  },
 ];
 
 export default function Events() {

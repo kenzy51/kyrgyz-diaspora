@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { Select } from "antd";
 import ReactCountryFlag from "react-country-flag";
-
+import unionKg from "../assets/unionKg.png";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { t, i18n } = useTranslation();
@@ -29,19 +29,10 @@ export default function Navbar() {
       className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md shadow-sm border-b border-gray-200 "
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-[70px]">
-        {/* Logo */}
         <Link to="/" className="flex items-center gap-3">
-          <img
-            src="https://static.wixstatic.com/media/98c256_031af4a38b2e485d97bdd8602fccff2c~mv2.jpg"
-            alt="Union KG"
-            className="w-10 h-10 rounded shadow-md object-cover"
-          />
-          <span className="font-extrabold text-xl text-gray-900 tracking-wide">
-            {t("unionKg")}
-          </span>
+          <img src={unionKg} alt="Union KG" className="w-30" />
         </Link>
 
-        {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8">
           {navItems.map((item) => (
             <NavLink
@@ -53,7 +44,22 @@ export default function Navbar() {
                 }`
               }
             >
-              {item.label}
+              {({ isActive }) => (
+                <>
+                  {item.label}
+                  {isActive && (
+                    <motion.div
+                      layoutId="navbar-underline"
+                      className="absolute left-0 -bottom-1 h-[2px] w-full bg-red-600 rounded-full"
+                      transition={{
+                        type: "spring",
+                        stiffness: 500,
+                        damping: 30,
+                      }}
+                    />
+                  )}
+                </>
+              )}
             </NavLink>
           ))}
 
