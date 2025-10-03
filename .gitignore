@@ -1,0 +1,51 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependency directories
+node_modules/
+**/node_modules/
+
+# Build outputs
+dist/
+dist-ssr/
+build/
+.out/
+.next/
+*.local
+
+# Frontend / Backend specific outputs
+kyrgyz-community-frontend/node_modules/
+backend/node_modules/
+kyrgyz-community-frontend/dist/
+backend/dist/
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Mac system files
+*.DS_Store
+
+# Optional cache
+.cache/
+.tern-port

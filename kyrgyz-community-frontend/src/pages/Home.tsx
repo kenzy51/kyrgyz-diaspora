@@ -1,0 +1,217 @@
+import { Button, Row, Col, Card } from "antd";
+import { Link } from "react-router-dom";
+import Container from "../components/Container";
+import { motion } from "framer-motion";
+
+export default function Home() {
+  return (
+    <div className="bg-gray-50">
+      <section
+        className="relative w-full bg-cover bg-center"
+        style={{
+          backgroundImage:
+            "url('https://www.forumdaily.com/wp-content/uploads/2020/05/shutterstock_1473913265.jpg')",
+          minHeight: "90vh",
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70" />
+
+        <div className="relative z-10 flex flex-col justify-center items-center text-center min-h-[90vh] px-6">
+          <h1 className="text-5xl md:text-6xl font-extrabold leading-tight mb-6 text-white drop-shadow-lg">
+            Kyrgyz Diaspora in the USA
+          </h1>
+          <p className="text-xl md:text-2xl max-w-2xl mx-auto mb-10 text-gray-200 leading-relaxed">
+            Uniting Kyrgyz people across America through events, resources, and
+            cultural pride 🇰🇬
+          </p>
+
+          <div className="flex justify-center gap-6 flex-wrap">
+            <Link to="/events">
+              <Button
+                type="primary"
+                size="large"
+                className="px-8 py-3 text-lg font-semibold"
+              >
+                View Events
+              </Button>
+            </Link>
+            <Link to="/resources">
+              <Button
+                size="large"
+                className="px-8 py-3 text-lg font-semibold bg-white text-red-700 hover:!bg-gray-100"
+              >
+                Resources
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-white">
+        <Container>
+          <motion.div
+            className="text-center mb-14"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            <h2 className="text-4xl font-bold text-red-700 mb-4">What We Do</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Supporting Kyrgyz diaspora through events, resources, and
+              community building.
+            </p>
+          </motion.div>
+          <Row gutter={[32, 32]}>
+            {[
+              {
+                title: "📅 Events",
+                text: "Concerts, holidays, sports tournaments, and meetups that bring us together.",
+              },
+              {
+                title: "🤝 Resources",
+                text: "Find businesses, organizations, and cultural centers within the Kyrgyz community.",
+              },
+              {
+                title: "👥 About Us",
+                text: "Learn about our mission to preserve Kyrgyz identity and empower immigrants.",
+              },
+            ].map((item, idx) => (
+              <Col xs={24} md={8} key={idx}>
+                <motion.div
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.7, delay: idx * 0.2 }}
+                >
+                  <Card
+                    hoverable
+                    bordered={false}
+                    className="rounded-2xl shadow-lg h-full"
+                  >
+                    <h3 className="text-xl font-semibold text-red-700 mb-3">
+                      {item.title}
+                    </h3>
+                    <p className="text-gray-600 leading-relaxed">{item.text}</p>
+                  </Card>
+                </motion.div>
+              </Col>
+            ))}
+          </Row>
+        </Container>
+      </section>
+
+      {/* Gallery Section */}
+      <section className="py-20 bg-gray-100">
+        <Container>
+          <motion.div
+            className="text-center mb-14"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            <h2 className="text-4xl font-bold text-red-700 mb-4">Community</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              A glimpse into our culture, traditions, and unity.
+            </p>
+          </motion.div>
+          <Row gutter={[16, 16]}>
+            {[
+              "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
+              "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
+              "https://images.unsplash.com/photo-1524504388940-b1c1722653e1",
+              "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
+              "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
+              "https://images.unsplash.com/photo-1544005313-94ddf0286df2",
+            ].map((src, idx) => (
+              <Col xs={12} md={8} key={idx}>
+                <motion.img
+                  src={src}
+                  alt={`Community ${idx}`}
+                  className="rounded-xl shadow-md object-cover h-64 w-full hover:scale-105 transition-transform duration-500"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: idx * 0.1 }}
+                />
+              </Col>
+            ))}
+          </Row>
+        </Container>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-20 bg-white">
+        <Container>
+          <motion.div
+            className="text-center mb-14"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            <h2 className="text-4xl font-bold text-red-700 mb-4">
+              Why Join Us?
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Hear from our members and see why being part of Union KG matters.
+            </p>
+          </motion.div>
+          <Row gutter={[24, 24]}>
+            {[
+              {
+                name: "Aizada",
+                text: "Thanks to Union KG, I found a network of Kyrgyz friends in New York and never felt alone.",
+              },
+              {
+                name: "Bakyt",
+                text: "This platform helped me discover Kyrgyz concerts and connect with my roots.",
+              },
+              {
+                name: "Saltanat",
+                text: "Union KG is preserving our culture while supporting the new generation.",
+              },
+            ].map((t, idx) => (
+              <Col xs={24} md={8} key={idx}>
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.7, delay: idx * 0.2 }}
+                >
+                  <Card className="rounded-2xl shadow-lg h-full">
+                    <p className="text-gray-600 mb-4 italic">“{t.text}”</p>
+                    <p className="font-semibold text-red-700">— {t.name}</p>
+                  </Card>
+                </motion.div>
+              </Col>
+            ))}
+          </Row>
+        </Container>
+      </section>
+
+      {/* Call to Action */}
+      <section className="py-20 bg-gradient-to-r from-red-600 to-red-700 text-center">
+        <Container>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="rounded-3xl p-12 shadow-xl text-white"
+          >
+            <h2 className="text-4xl font-bold mb-6">Join Our Community</h2>
+            <p className="text-red-100 text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
+              Share events, support each other, and help preserve Kyrgyz culture
+              in America. Together, we are stronger.
+            </p>
+            <Link to="/admin">
+              <Button
+                type="primary"
+                size="large"
+                className="px-10 py-2 text-lg font-semibold bg-white text-red-700 hover:!bg-gray-100"
+              >
+                Add Event
+              </Button>
+            </Link>
+          </motion.div>
+        </Container>
+      </section>
+    </div>
+  );
+}
