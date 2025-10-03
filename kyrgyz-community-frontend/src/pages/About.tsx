@@ -1,6 +1,7 @@
 import Container from "../components/Container";
 import { motion } from "framer-motion";
 import { Collapse } from "antd";
+import yurta from '../assets/yurta.svg'
 
 import {
   EnvironmentOutlined,
@@ -13,7 +14,6 @@ const { Panel } = Collapse;
 export default function About() {
   return (
     <div className="bg-gray-50">
-      {/* Hero Section */}
       <section
         className="relative w-full bg-cover bg-center"
         style={{
@@ -21,7 +21,6 @@ export default function About() {
           minHeight: "75vh",
         }}
       >
-        {/* Overlay (darkens image for readability) */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
 
         <motion.div
@@ -38,12 +37,9 @@ export default function About() {
             and unity across the U.S.
           </p>
         </motion.div>
-
-        {/* Decorative shadow at bottom */}
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/60 to-transparent"></div>
       </section>
 
-      {/* Mission & Vision */}
       <section className="py-20 bg-white">
         <Container>
           <motion.div
@@ -73,7 +69,7 @@ export default function About() {
               </ul>
             </div>
             <motion.img
-              src="https://images.unsplash.com/photo-1589881133825-51f3c3b81fb9"
+              src={yurta}
               alt="Kyrgyz Culture"
               className="rounded-2xl shadow-lg object-cover h-80 w-full"
               initial={{ opacity: 0 }}
@@ -84,7 +80,6 @@ export default function About() {
         </Container>
       </section>
 
-      {/* Services */}
       <section className="py-20 bg-red-50">
         <Container>
           <motion.div

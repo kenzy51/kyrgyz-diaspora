@@ -3,6 +3,8 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Events from "./pages/Events";
 import About from "./pages/About";
+import CreateEventPage from "./pages/CreateEvent";
+import Resources from "./pages/Resources";
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/events" element={<Events />} />
           <Route path="/about" element={<About />} />
+          <Route path="/createEvent" element={<CreateEventPage />} />
+          <Route path="/resources" element={<Resources />} />
         </Routes>
       </main>
     </div>

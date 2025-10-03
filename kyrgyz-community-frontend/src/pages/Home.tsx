@@ -2,7 +2,9 @@ import { Button, Row, Col, Card } from "antd";
 import { Link } from "react-router-dom";
 import Container from "../components/Container";
 import { motion } from "framer-motion";
-
+import photo1 from "../../public/images/community/bizdin.png";
+import photo2 from "../../public/images/community/kyrgyzCulture.jpg";
+const community = [photo1, photo2, photo1, photo2, photo1, photo2];
 export default function Home() {
   return (
     <div className="bg-gray-50">
@@ -113,14 +115,7 @@ export default function Home() {
             </p>
           </motion.div>
           <Row gutter={[16, 16]}>
-            {[
-              "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
-              "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
-              "https://images.unsplash.com/photo-1524504388940-b1c1722653e1",
-              "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
-              "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
-              "https://images.unsplash.com/photo-1544005313-94ddf0286df2",
-            ].map((src, idx) => (
+            {community.map((src, idx) => (
               <Col xs={12} md={8} key={idx}>
                 <motion.img
                   src={src}
