@@ -5,8 +5,10 @@ import Events from "./pages/Events";
 import About from "./pages/About";
 import CreateEventPage from "./pages/CreateEvent";
 import Resources from "./pages/Resources";
+import Community from "./pages/Community";
 
 function App() {
+
   return (
     <div>
       <Navbar />
@@ -17,6 +19,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/createEvent" element={<CreateEventPage />} />
           <Route path="/resources" element={<Resources />} />
+          <Route path="/community" element={<Community />} />
         </Routes>
       </main>
     </div>

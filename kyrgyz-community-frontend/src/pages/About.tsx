@@ -9,6 +9,7 @@ import {
   MailOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import ParcelService from "../components/About/ParcelService";
 
 const { Panel } = Collapse;
 
@@ -131,19 +132,7 @@ export default function About() {
                 appointments to make your life easier.
               </Panel>
 
-              <Panel
-                header={
-                  <div className="flex items-center text-lg md:text-xl font-semibold text-red-700">
-                    <span className="mr-3 text-2xl">📦</span> Parcel Delivery
-                  </div>
-                }
-                key="2"
-                className="text-gray-700 text-lg leading-relaxed p-4 md:p-6"
-              >
-                Reliable shipping to Kyrgyzstan, Kazakhstan, and Turkmenistan.
-                <br />
-                <strong>Contact:</strong> 302-332-2979
-              </Panel>
+              <ParcelService />
 
               <Panel
                 header={

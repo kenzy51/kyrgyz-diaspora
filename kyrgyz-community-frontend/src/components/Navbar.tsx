@@ -2,25 +2,22 @@ import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { Select } from "antd";
-import ReactCountryFlag from "react-country-flag";
 import unionKg from "../assets/unionKg.png";
+import LanguageSelector from "../utils/ui/LanguageSelector/LanguageSelector";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const navItems = [
     { key: "home", label: t("home"), path: "/" },
     { key: "events", label: t("events"), path: "/events" },
+    { key: "community", label: t("community"), path: "/community" },
     { key: "resources", label: t("resources"), path: "/resources" },
     { key: "about", label: t("about"), path: "/about" },
     { key: "createEvent", label: t("createEvent"), path: "/createEvent" },
   ];
 
-  const changeLang = (lng: string) => {
-    i18n.changeLanguage(lng);
-  };
-
+ 
   return (
     <motion.nav
       initial={{ y: -60, opacity: 0 }}
@@ -63,34 +60,7 @@ export default function Navbar() {
             </NavLink>
           ))}
 
-          <Select
-            onChange={(value) => changeLang(value)}
-            defaultValue={i18n.language}
-            className="border rounded px-2 py-1 text-gray-700"
-            style={{ width: 60 }}
-          >
-            <Select.Option value="en">
-              <ReactCountryFlag
-                countryCode="US"
-                svg
-                style={{ width: "24px", height: "24px" }}
-              />
-            </Select.Option>
-            <Select.Option value="ru">
-              <ReactCountryFlag
-                countryCode="RU"
-                svg
-                style={{ width: "24px", height: "24px" }}
-              />
-            </Select.Option>
-            <Select.Option value="kg">
-              <ReactCountryFlag
-                countryCode="KG"
-                svg
-                style={{ width: "24px", height: "24px" }}
-              />
-            </Select.Option>
-          </Select>
+         <LanguageSelector/>
         </div>
         <div className="md:hidden">
           <button
@@ -156,34 +126,7 @@ export default function Navbar() {
                   {item.label}
                 </NavLink>
               ))}
-              <Select
-                onChange={(value) => changeLang(value)}
-                defaultValue={i18n.language}
-                className="border rounded px-2 py-1 text-gray-700"
-                style={{ width: 60 }}
-              >
-                <Select.Option value="en">
-                  <ReactCountryFlag
-                    countryCode="US"
-                    svg
-                    style={{ width: "24px", height: "24px" }}
-                  />
-                </Select.Option>
-                <Select.Option value="ru">
-                  <ReactCountryFlag
-                    countryCode="RU"
-                    svg
-                    style={{ width: "24px", height: "24px" }}
-                  />
-                </Select.Option>
-                <Select.Option value="kg">
-                  <ReactCountryFlag
-                    countryCode="KG"
-                    svg
-                    style={{ width: "24px", height: "24px" }}
-                  />
-                </Select.Option>
-              </Select>
+             
             </div>
           </motion.div>
         )}
