@@ -51,13 +51,11 @@ export default function About() {
             transition={{ duration: 0.7 }}
             viewport={{ once: true }}
           >
-            {/* Text */}
             <div>
               <h2 className="text-4xl font-extrabold text-red-700 mb-8 relative">
                 Mission & Vision
                 <span className="block w-20 h-1 bg-red-600 mt-3 rounded"></span>
               </h2>
-
               <ul className="space-y-6 text-lg text-gray-700">
                 <li className="flex items-start gap-4 p-5 bg-white rounded-2xl shadow-md hover:shadow-xl transition">
                   <div className="text-2xl">📖</div>

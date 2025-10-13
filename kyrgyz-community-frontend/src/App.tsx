@@ -6,9 +6,9 @@ import About from "./pages/About";
 import CreateEventPage from "./pages/CreateEvent";
 import Resources from "./pages/Resources";
 import Community from "./pages/Community";
+import Footer from "./components/footer/Footer";
 
 function App() {
-
   return (
     <div>
       <Navbar />
@@ -22,6 +22,7 @@ function App() {
           <Route path="/community" element={<Community />} />
         </Routes>
       </main>
+      <Footer />
     </div>
   );
 }

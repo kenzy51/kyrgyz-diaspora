@@ -1,0 +1,1 @@
+{"root":["./src/app.controller.ts","./src/app.module.ts","./src/app.service.ts","./src/main.ts","./src/events/event.controller.ts","./src/events/event.module.ts","./src/events/event.service.ts","./src/events/dto/create-event.dto.ts","./src/events/schemas/event.schema.ts"],"version":"5.9.3"}
