@@ -21,5 +21,4 @@ export class Event {
   status!: string;
 }
 
-// ✅ Create and export schema
 export const EventSchema = SchemaFactory.createForClass(Event);

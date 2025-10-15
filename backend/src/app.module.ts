@@ -10,10 +10,10 @@ import { EventsModule } from "./events/event.module";
   imports: [
     ConfigModule.forRoot({
       envFilePath: ".env",
+      isGlobal: true,
     }),
-    MongooseModule.forRoot(
-      "mongodb+srv://kanat:kanat200411@kyrgyz-community-cluste.aqmjuua.mongodb.net/communitydb?retryWrites=true&w=majority&appName=kyrgyz-community-cluster",
-    ),
+    // @ts-ignore
+    MongooseModule.forRoot(process.env.MONGO_URI),
     EventsModule,
   ],
 })
