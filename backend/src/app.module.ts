@@ -10,10 +10,9 @@ import { EventsModule } from "./events/event.module";
   imports: [
     ConfigModule.forRoot({
       envFilePath: ".env",
-      isGlobal: true,
     }),
     // @ts-ignore
-    MongooseModule.forRoot(process.env.MONGO_URI),
+    MongooseModule.forRoot(process.env.MONGO_URL),
     EventsModule,
   ],
 })
