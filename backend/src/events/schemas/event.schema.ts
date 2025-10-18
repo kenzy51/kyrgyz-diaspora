@@ -12,11 +12,13 @@ export class Event {
 
   @Prop()
   location!: string;
+  @Prop()
+  city!: string;
 
   @Prop({
     type: String,
-    enum: ['pending', 'approved', 'rejected'],
-    default: 'pending',
+    enum: ["pending", "approved", "rejected"],
+    default: "pending",
   })
   status!: string;
 }
