@@ -94,7 +94,7 @@ const Footer = () => {
               <FacebookOutlined />
             </a>
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/union.kg.nystate/"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-red-500 transition"

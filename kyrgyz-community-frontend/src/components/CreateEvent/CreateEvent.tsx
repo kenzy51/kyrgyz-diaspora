@@ -1,43 +1,26 @@
-import { useState } from "react";
-import { Form, Input, DatePicker, Select, Button, Upload } from "antd";
-import { UploadOutlined } from "@ant-design/icons";
+import { Form, Input, DatePicker, Select, Button } from "antd";
+import { useEventsStore } from "../../store/useEventsStore";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 
 const { Option } = Select;
 
 export default function CreateEvent() {
-  const [loading, setLoading] = useState(false);
+  const { createEvent, loading } = useEventsStore();
+  const [form] = Form.useForm();
   const navigate = useNavigate();
 
   const onFinish = async (values) => {
-    setLoading(true);
-    try {
-      const payload = {
-        ...values,
-        date: values.date.format("MMMM DD, YYYY"),
-      };
+    console.log(loading);
+    const payload = {
+      title: values.title,
+      date: values.date.toISOString(),
+      city: values.city,
+      location: values.location,
+    };
+    form.resetFields();
 
-      const res = await fetch("http://localhost:5000/api/events", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-        body: JSON.stringify(payload),
-      });
-
-      if (!res.ok) throw new Error("Failed to create event");
-
-      navigate("/events");
-      toast.success("Wow so easy!")
-
-    } catch (err) {
-      alert("Error creating event");
-      toast.error(err)
-    } finally {
-      setLoading(false);
-    }
+    await createEvent(payload);
+    navigate("/events");
   };
 
   return (
@@ -47,7 +30,7 @@ export default function CreateEvent() {
           Create New Event
         </h1>
 
-        <Form layout="vertical" onFinish={onFinish}>
+        <Form layout="vertical" onFinish={onFinish} form={form}>
           <Form.Item
             name="title"
             label="Event Title"
@@ -75,22 +58,22 @@ export default function CreateEvent() {
             label="Location"
             rules={[{ required: true }]}
           >
-            <Input placeholder="Enter location" />
+            <Input placeholder="Brooklyn, neptune av/Arlington heights, 13av" />
           </Form.Item>
 
-          <Form.Item
+          {/* <Form.Item
             name="image"
             label="Image URL"
             rules={[{ required: true }]}
           >
             <Input placeholder="Paste image URL" />
-          </Form.Item>
-
+          </Form.Item> */}
+          {/* 
           <Form.Item label="Upload Image (optional)">
             <Upload beforeUpload={() => false}>
               <Button icon={<UploadOutlined />}>Click to Upload</Button>
             </Upload>
-          </Form.Item>
+          </Form.Item> */}
 
           <Button type="primary" htmlType="submit" loading={loading} block>
             Create Event

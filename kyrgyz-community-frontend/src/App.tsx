@@ -7,11 +7,14 @@ import CreateEventPage from "./pages/CreateEvent";
 import Resources from "./pages/Resources";
 import Community from "./pages/Community";
 import Footer from "./components/footer/Footer";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <div>
       <Navbar />
+            <ToastContainer position="top-right" autoClose={3000} theme="colored" />
+
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
