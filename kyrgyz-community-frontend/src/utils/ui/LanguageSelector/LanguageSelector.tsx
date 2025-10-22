@@ -4,15 +4,14 @@ import { useTranslation } from "react-i18next";
 
 const LanguageSelector = () => {
   const { i18n } = useTranslation();
-
   const changeLang = (lng: string) => {
     i18n.changeLanguage(lng);
   };
-
+  const currentLang = i18n.language.split("-")[0];
   return (
     <Select
+      value={currentLang}
       onChange={(value) => changeLang(value)}
-      defaultValue={i18n.language}
       className="border rounded px-2 py-1 text-gray-700"
       style={{ width: 60 }}
     >

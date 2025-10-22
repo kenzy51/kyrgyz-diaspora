@@ -9,12 +9,12 @@ export default function Navbar() {
   const { t } = useTranslation();
 
   const navItems = [
-    { key: "home", label: t("home"), path: "/" },
-    { key: "events", label: t("events"), path: "/events" },
-    { key: "community", label: t("community"), path: "/community" },
-    { key: "resources", label: t("resources"), path: "/resources" },
-    { key: "about", label: t("about"), path: "/about" },
-    { key: "createEvent", label: t("createEvent"), path: "/createEvent" },
+    { key: "home", label: t("nav.home"), path: "/" },
+    { key: "events", label: t("nav.events"), path: "/events" },
+    { key: "community", label: t("nav.community"), path: "/community" },
+    { key: "resources", label: t("nav.resources"), path: "/resources" },
+    { key: "about", label: t("nav.about"), path: "/about" },
+    { key: "createEvent", label: t("nav.createEvent"), path: "/createEvent" },
   ];
 
  

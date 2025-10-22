@@ -1,9 +1,66 @@
 {
-  "home": "Home",
-  "events": "Events",
-  "resources": "Resources",
-  "about": "About",
-  "createEvent": "Create Event",
-  "community":"Community",
-  "unionKg": "Union KG"
+  "nav": {
+    "home": "Home",
+    "events": "Events",
+    "resources": "Resources",
+    "about": "About",
+    "createEvent": "Create Event",
+    "community": "Community",
+    "unionKg": "Union KG"
+  },
+  "createEvent": {
+    "title": "Create New Event",
+    "eventTitle": "Event Title",
+    "date": "Date",
+    "city": "City",
+    "location": "Location",
+    "enterTitle": "Enter event title",
+    "selectDate": "Select date",
+    "selectCity": "Select a city",
+    "enterLocation": "Enter location",
+    "createButton": "Create Event"
+  },
+  "about": {
+    "heroTitle": "About Union KG NY",
+    "heroText": "A community-driven organization preserving Kyrgyz identity, culture, and unity across the U.S.",
+    "missionTitle": "Mission & Vision",
+    "mission": {
+      "language": {
+        "title": "Language Revitalization",
+        "text": "We are passionately committed to facilitating the learning of the Kyrgyz language, providing a platform for individuals to reconnect with their roots."
+      },
+      "culture": {
+        "title": "Cultural Preservation",
+        "text": "Through events, workshops, and educational programs, we aim to instill a sense of pride and appreciation for our heritage."
+      }
+    },
+    "servicesTitle": "Our Services",
+    "consular": {
+      "title": "Consular Services",
+      "text1": "We help community members with official consular services to make your life in the U.S. easier and stress-free. Our services include:",
+      "list": {
+        "passport": "Assistance with passport renewals",
+        "id": "Support with ID replacements",
+        "appointment": "Scheduling and guidance for consular appointments"
+      },
+      "text2": "Whether you are updating your documents or need guidance for your next consular visit, our team is here to support you step by step.",
+      "button": "Submit a Request Online"
+    },
+    "tax": {
+      "title": "Tax Services & Consultations",
+      "text": "Partnership with BK Tax Solutions. Members get a 10% discount.",
+      "contact": "Contact"
+    },
+    "contact": {
+      "title": "Contact Us",
+      "address": "1829 East 13th Street, Brooklyn, NY 11229",
+      "phone": "929-325-9094",
+      "email": "unionkgny@gmail.com"
+    },
+    "events": {
+      "title": "Upcoming Events",
+      "noEvents": "No events at the moment. Stay tuned for announcements!",
+      "button": "Submit an Event"
+    }
+  }
 }

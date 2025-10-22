@@ -2,7 +2,6 @@ import Container from "../components/Container";
 import { motion } from "framer-motion";
 import { Button, Collapse } from "antd";
 import aboutUs from "../assets/aboutUs.png";
-
 import {
   EnvironmentOutlined,
   PhoneOutlined,
@@ -10,12 +9,16 @@ import {
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import ParcelService from "../components/About/ParcelService";
+import { useTranslation } from "react-i18next";
 
 const { Panel } = Collapse;
 
 export default function About() {
+  const { t } = useTranslation();
+
   return (
     <div className="bg-gray-50">
+      {/* Hero Section */}
       <section
         className="relative w-full bg-cover bg-center"
         style={{
@@ -32,16 +35,16 @@ export default function About() {
           transition={{ duration: 0.8 }}
         >
           <h1 className="text-5xl md:text-6xl font-extrabold drop-shadow-xl text-white mb-6">
-            About Union KG NY
+            {t("about.heroTitle")}
           </h1>
           <p className="mt-2 text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed text-gray-200 drop-shadow-lg">
-            A community-driven organization preserving Kyrgyz identity, culture,
-            and unity across the U.S.
+            {t("about.heroText")}
           </p>
         </motion.div>
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/60 to-transparent"></div>
       </section>
 
+      {/* Mission & Vision */}
       <section className="py-24 bg-gradient-to-b from-white to-red-50">
         <Container>
           <motion.div
@@ -53,7 +56,7 @@ export default function About() {
           >
             <div>
               <h2 className="text-4xl font-extrabold text-red-700 mb-8 relative">
-                Mission & Vision
+                {t("about.missionTitle")}
                 <span className="block w-20 h-1 bg-red-600 mt-3 rounded"></span>
               </h2>
               <ul className="space-y-6 text-lg text-gray-700">
@@ -61,22 +64,18 @@ export default function About() {
                   <div className="text-2xl">📖</div>
                   <p>
                     <strong className="text-red-700">
-                      Language Revitalization
+                      {t("about.mission.language.title")}
                     </strong>{" "}
-                    — We are passionately committed to facilitating the learning
-                    of the Kyrgyz language, providing a platform for individuals
-                    to reconnect with their roots.
+                    — {t("about.mission.language.text")}
                   </p>
                 </li>
                 <li className="flex items-start gap-4 p-5 bg-white rounded-2xl shadow-md hover:shadow-xl transition">
                   <div className="text-2xl">🎭</div>
                   <p>
                     <strong className="text-red-700">
-                      Cultural Preservation
+                      {t("about.mission.culture.title")}
                     </strong>{" "}
-                    — Through events, workshops, and educational programs, we
-                    aim to instill a sense of pride and appreciation for our
-                    heritage.
+                    — {t("about.mission.culture.text")}
                   </p>
                 </li>
               </ul>
@@ -90,7 +89,7 @@ export default function About() {
             >
               <img
                 src={aboutUs}
-                alt="Kyrgyz Culture"
+                alt={t("about.heroTitle")}
                 className="rounded-3xl shadow-2xl object-cover w-full h-full"
               />
             </motion.div>
@@ -98,6 +97,7 @@ export default function About() {
         </Container>
       </section>
 
+      {/* Services */}
       <section className="py-24 bg-gradient-to-b from-red-50 to-white">
         <Container>
           <motion.div
@@ -108,7 +108,7 @@ export default function About() {
             className="max-w-4xl mx-auto"
           >
             <h2 className="text-4xl font-extrabold text-red-700 mb-12 text-center">
-              Our Services
+              {t("about.servicesTitle")}
             </h2>
 
             <Collapse
@@ -120,38 +120,23 @@ export default function About() {
               <Panel
                 header={
                   <div className="flex items-center text-lg md:text-xl font-semibold text-red-700">
-                    <span className="mr-3 text-2xl">🛂</span> Consular Services
+                    <span className="mr-3 text-2xl">🛂</span>{" "}
+                    {t("about.consular.title")}
                   </div>
                 }
                 key="1"
                 className="text-gray-700 text-lg leading-relaxed p-4 md:p-6"
               >
                 <div className="space-y-4">
-                  <p>
-                    We help community members with{" "}
-                    <strong>official consular services</strong> to make your
-                    life in the U.S. easier and stress-free. Our services
-                    include:
-                  </p>
+                  <p>{t("about.consular.text1")}</p>
 
                   <ul className="list-disc pl-6 space-y-2">
-                    <li>
-                      📑 Assistance with <strong>passport renewals</strong>
-                    </li>
-                    <li>
-                      🪪 Support with <strong>ID replacements</strong>
-                    </li>
-                    <li>
-                      📅 Scheduling and guidance for{" "}
-                      <strong>consular appointments</strong>
-                    </li>
+                    <li>📑 {t("about.consular.list.passport")}</li>
+                    <li>🪪 {t("about.consular.list.id")}</li>
+                    <li>📅 {t("about.consular.list.appointment")}</li>
                   </ul>
 
-                  <p>
-                    Whether you are updating your documents or need guidance for
-                    your next consular visit, our team is here to support you
-                    step by step.
-                  </p>
+                  <p>{t("about.consular.text2")}</p>
 
                   <div className="mt-6">
                     <a
@@ -160,7 +145,7 @@ export default function About() {
                       rel="noopener noreferrer"
                       className="inline-block bg-red-600 text-white px-5 py-3 rounded-lg shadow-md hover:bg-red-700 transition text-center text-lg font-medium"
                     >
-                      Submit a Request Online
+                      {t("about.consular.button")}
                     </a>
                   </div>
                 </div>
@@ -171,23 +156,23 @@ export default function About() {
               <Panel
                 header={
                   <div className="flex items-center text-lg md:text-xl font-semibold text-red-700">
-                    <span className="mr-3 text-2xl">💼</span> Tax Services &
-                    Consultations
+                    <span className="mr-3 text-2xl">💼</span>{" "}
+                    {t("about.tax.title")}
                   </div>
                 }
                 key="3"
                 className="text-gray-700 text-lg leading-relaxed p-4 md:p-6"
               >
-                Partnership with BK Tax Solutions. Members get a{" "}
-                <strong className="text-red-600">10% discount</strong>.
+                {t("about.tax.text")}
                 <br />
-                <strong>Contact:</strong> 929-556-6272
+                <strong>{t("about.tax.contact")}: </strong>929-556-6272
               </Panel>
             </Collapse>
           </motion.div>
         </Container>
       </section>
 
+      {/* Contact Section */}
       <section className="py-20 bg-gray-100">
         <Container>
           <motion.div
@@ -199,19 +184,20 @@ export default function About() {
           >
             <div>
               <h2 className="text-3xl font-bold text-red-700 mb-6">
-                Contact Us
+                {t("about.contact.title")}
               </h2>
               <div className="space-y-4 text-lg text-gray-700">
                 <p>
-                  <EnvironmentOutlined className="text-red-600 mr-2" /> 1829
-                  East 13th Street, Brooklyn, NY 11229
+                  <EnvironmentOutlined className="text-red-600 mr-2" />{" "}
+                  {t("about.contact.address")}
                 </p>
                 <p>
-                  <PhoneOutlined className="text-red-600 mr-2" /> 929-325-9094
+                  <PhoneOutlined className="text-red-600 mr-2" />{" "}
+                  {t("about.contact.phone")}
                 </p>
                 <p>
                   <MailOutlined className="text-red-600 mr-2" />{" "}
-                  unionkgny@gmail.com
+                  {t("about.contact.email")}
                 </p>
               </div>
             </div>
@@ -230,6 +216,7 @@ export default function About() {
         </Container>
       </section>
 
+      {/* Upcoming Events */}
       <section className="py-20 bg-white">
         <Container>
           <motion.div
@@ -240,14 +227,14 @@ export default function About() {
             viewport={{ once: true }}
           >
             <h2 className="text-3xl font-bold text-red-700 mb-6">
-              Upcoming Events
+              {t("about.events.title")}
             </h2>
             <p className="text-gray-600 italic text-lg mb-6">
-              No events at the moment. Stay tuned for announcements!
+              {t("about.events.noEvents")}
             </p>
             <Link to="/createEvent">
               <Button className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-xl shadow-md transition">
-                Submit an Event
+                {t("about.events.button")}
               </Button>
             </Link>
           </motion.div>

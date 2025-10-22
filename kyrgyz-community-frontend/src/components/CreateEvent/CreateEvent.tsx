@@ -1,16 +1,17 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Form, Input, DatePicker, Select, Button } from "antd";
 import { useEventsStore } from "../../store/useEventsStore";
 import { useNavigate } from "react-router-dom";
-
+import { useTranslation } from "react-i18next";
 const { Option } = Select;
 
 export default function CreateEvent() {
+  const { t } = useTranslation();
   const { createEvent, loading } = useEventsStore();
   const [form] = Form.useForm();
   const navigate = useNavigate();
 
-  const onFinish = async (values) => {
-    console.log(loading);
+  const onFinish = async (values: any) => {
     const payload = {
       title: values.title,
       date: values.date.toISOString(),
@@ -18,7 +19,6 @@ export default function CreateEvent() {
       location: values.location,
     };
     form.resetFields();
-
     await createEvent(payload);
     navigate("/events");
   };
@@ -27,24 +27,32 @@ export default function CreateEvent() {
     <div className="flex items-center justify-center min-h-screen bg-gray-50 pt-24">
       <div className="bg-white shadow-xl rounded-lg p-8 w-full max-w-lg">
         <h1 className="text-2xl font-bold mb-6 text-center text-red-700">
-          Create New Event
+          {t("createEvent.title")}
         </h1>
 
         <Form layout="vertical" onFinish={onFinish} form={form}>
           <Form.Item
             name="title"
-            label="Event Title"
-            rules={[{ required: true }]}
+            label={t("createEvent.eventTitle")}
+            rules={[{ required: true, message: t("enterTitle") }]}
           >
-            <Input placeholder="Enter event title" />
+            <Input placeholder={t("enterTitle")} />
           </Form.Item>
 
-          <Form.Item name="date" label="Date" rules={[{ required: true }]}>
-            <DatePicker className="w-full" />
+          <Form.Item
+            name="date"
+            label={t("createEvent.date")}
+            rules={[{ required: true, message: t("createEvent.selectDate") }]}
+          >
+            <DatePicker className="w-full" placeholder={t("createEvent.selectDate")} />
           </Form.Item>
 
-          <Form.Item name="city" label="City" rules={[{ required: true }]}>
-            <Select placeholder="Select a city">
+          <Form.Item
+            name="city"
+            label={t("createEvent.city")}
+            rules={[{ required: true, message: t("createEvent.selectCity") }]}
+          >
+            <Select placeholder={t("createEvent.selectCity")}>
               <Option value="New York">New York</Option>
               <Option value="Chicago">Chicago</Option>
               <Option value="Los Angeles">Los Angeles</Option>
@@ -55,28 +63,14 @@ export default function CreateEvent() {
 
           <Form.Item
             name="location"
-            label="Location"
-            rules={[{ required: true }]}
+            label={t("createEvent.location")}
+            rules={[{ required: true, message: t("createEvent.enterLocation") }]}
           >
-            <Input placeholder="Brooklyn, neptune av/Arlington heights, 13av" />
+            <Input placeholder={t("createEvent.enterLocation")} />
           </Form.Item>
 
-          {/* <Form.Item
-            name="image"
-            label="Image URL"
-            rules={[{ required: true }]}
-          >
-            <Input placeholder="Paste image URL" />
-          </Form.Item> */}
-          {/* 
-          <Form.Item label="Upload Image (optional)">
-            <Upload beforeUpload={() => false}>
-              <Button icon={<UploadOutlined />}>Click to Upload</Button>
-            </Upload>
-          </Form.Item> */}
-
           <Button type="primary" htmlType="submit" loading={loading} block>
-            Create Event
+            {t("createEvent.createButton")}
           </Button>
         </Form>
       </div>
