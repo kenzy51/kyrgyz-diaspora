@@ -18,7 +18,6 @@ export default function About() {
 
   return (
     <div className="bg-gray-50">
-      {/* Hero Section */}
       <section
         className="relative w-full bg-cover bg-center"
         style={{
@@ -44,7 +43,6 @@ export default function About() {
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/60 to-transparent"></div>
       </section>
 
-      {/* Mission & Vision */}
       <section className="py-24 bg-gradient-to-b from-white to-red-50">
         <Container>
           <motion.div
@@ -97,7 +95,6 @@ export default function About() {
         </Container>
       </section>
 
-      {/* Services */}
       <section className="py-24 bg-gradient-to-b from-red-50 to-white">
         <Container>
           <motion.div
@@ -171,8 +168,6 @@ export default function About() {
           </motion.div>
         </Container>
       </section>
-
-      {/* Contact Section */}
       <section className="py-20 bg-gray-100">
         <Container>
           <motion.div
@@ -216,7 +211,6 @@ export default function About() {
         </Container>
       </section>
 
-      {/* Upcoming Events */}
       <section className="py-20 bg-white">
         <Container>
           <motion.div

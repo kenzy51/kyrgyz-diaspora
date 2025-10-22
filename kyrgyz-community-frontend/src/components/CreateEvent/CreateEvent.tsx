@@ -3,6 +3,7 @@ import { Form, Input, DatePicker, Select, Button } from "antd";
 import { useEventsStore } from "../../store/useEventsStore";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+
 const { Option } = Select;
 
 export default function CreateEvent() {
