@@ -2,7 +2,8 @@ import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import unionKg from "../assets/unionKg.png";
+// import unionKg from "../assets/unionKg.png";
+import logo from "../assets/logo2.png";
 import LanguageSelector from "../utils/ui/LanguageSelector/LanguageSelector";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,7 +27,13 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-[70px]">
         <Link to="/" className="flex items-center gap-3">
-          <img src={unionKg} alt="Union KG" className="w-30" />
+          <img
+            src={logo}
+            alt="Union KG"
+            className="w-30"
+            style={{ borderRadius: "20%" }}
+          />
+          {/* NomadHub */}
         </Link>
 
         <div className="hidden md:flex items-center gap-8">

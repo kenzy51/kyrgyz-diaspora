@@ -14,7 +14,9 @@ export const WhatWeDo = () => {
         >
           <h2 className="text-7xl font-bold text-red-700 mb-4">What We Do</h2>
           <p className="text-gray-600 max-w-4xl mx-auto text-2xl">
-            Supporting Kyrgyz diaspora through events, resources, and community
+            Supporting
+            {/* Kyrgyz  */}
+            Central Asian diaspora through events, resources, and community
             building.
           </p>
         </motion.div>

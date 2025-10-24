@@ -7,7 +7,7 @@ import { WhatWeDo } from "../components/Home/WhatWeDo";
 import ornament from "../assets/kyrgyz12.png";
 import Community from "../components/Home/Community";
 import { useTranslation } from "react-i18next";
-
+import centralAsianBackground from "../assets/centralAsianBackground.png";
 export default function Home() {
   const { t } = useTranslation();
 
@@ -18,8 +18,7 @@ export default function Home() {
       <section
         className="relative w-full bg-cover bg-center"
         style={{
-          backgroundImage:
-            "url('https://www.forumdaily.com/wp-content/uploads/2020/05/shutterstock_1473913265.jpg')",
+          backgroundImage: `url(${centralAsianBackground})`,
           minHeight: "90vh",
         }}
       >
@@ -27,10 +26,13 @@ export default function Home() {
 
         <div className="relative z-10 flex flex-col justify-center items-center text-center min-h-[90vh] px-6">
           <h1 className="text-5xl md:text-6xl font-extrabold leading-tight mb-6 text-white drop-shadow-lg">
-            {t("home.heroTitle")}
+            {/* {t("home.heroTitle")} */}
+            Central Asian Community in the USA
           </h1>
           <p className="text-xl md:text-2xl max-w-2xl mx-auto mb-10 text-gray-200 leading-relaxed">
-            {t("home.heroText")}
+            {/* {t("home.heroText")} */}
+            Celebrating our shared heritage through events, connections, and
+            creativity.
           </p>
 
           <div className="flex justify-center gap-6 flex-wrap">

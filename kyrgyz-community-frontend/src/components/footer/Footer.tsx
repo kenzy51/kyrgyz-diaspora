@@ -18,11 +18,12 @@ const Footer = () => {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-2xl font-extrabold text-white mb-4">
-            Union KG NY
+            {/* Union KG NY */}
+            NomadHub
           </h2>
           <p className="text-sm leading-relaxed">
-            Preserving Kyrgyz culture, supporting our community, and creating
-            unity across the U.S.
+            Preserving Central Asian culture, supporting our community, and
+            creating unity across the U.S.
           </p>
         </motion.div>
 
