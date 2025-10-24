@@ -73,7 +73,7 @@ const Footer = () => {
               <PhoneOutlined className="text-red-500" /> +1 (929) 325-9094
             </li>
             <li className="flex items-center gap-2">
-              <MailOutlined className="text-red-500" /> unionkgny@gmail.com
+              <MailOutlined className="text-red-500" /> NomadHub@gmail.com
             </li>
           </ul>
         </motion.div>
@@ -115,7 +115,7 @@ const Footer = () => {
       </div>
 
       <div className="border-t border-gray-700 mt-12 pt-6 text-center text-sm text-gray-500">
-        © {new Date().getFullYear()} Union KG NY. All rights reserved.
+        © {new Date().getFullYear()} NomadHub. All rights reserved.
       </div>
     </footer>
   );

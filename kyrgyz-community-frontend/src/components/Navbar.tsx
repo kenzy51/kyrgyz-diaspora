@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 // import unionKg from "../assets/unionKg.png";
-import logo from "../assets/logo2.png";
+import logo from "../assets/logo3.png";
 import LanguageSelector from "../utils/ui/LanguageSelector/LanguageSelector";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,6 +12,7 @@ export default function Navbar() {
   const navItems = [
     { key: "home", label: t("nav.home"), path: "/" },
     { key: "events", label: t("nav.events"), path: "/events" },
+    { key: "events", label: "for Business", path: "/business" },
     // { key: "community", label: t("nav.community"), path: "/communiqty" },
     { key: "resources", label: t("nav.resources"), path: "/resources" },
     { key: "about", label: t("nav.about"), path: "/about" },
@@ -27,12 +28,7 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-[70px]">
         <Link to="/" className="flex items-center gap-3">
-          <img
-            src={logo}
-            alt="Union KG"
-            className="w-30"
-            style={{ borderRadius: "20%" }}
-          />
+          <img src={logo} alt="Union KG" className="w-30" />
           {/* NomadHub */}
         </Link>
 
