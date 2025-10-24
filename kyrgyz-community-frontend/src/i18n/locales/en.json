@@ -93,5 +93,10 @@
       "text": "Share events, support each other, and help preserve Kyrgyz culture in America. Together, we are stronger.",
       "button": "Add Event"
     }
+  },
+  "events":{
+    "title":"Upcoming Events",
+    "description":"Discover celebrations, concerts, sports tournaments, and cultural gatherings of the Kyrgyz diaspora across the United States.",
+    "noEvents":"No events at the moment. Stay tuned for announcements!"
   }
 }

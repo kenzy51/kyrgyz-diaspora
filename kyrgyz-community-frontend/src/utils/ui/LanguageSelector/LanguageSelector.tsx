@@ -6,6 +6,7 @@ const LanguageSelector = () => {
   const { i18n } = useTranslation();
   const changeLang = (lng: string) => {
     i18n.changeLanguage(lng);
+    localStorage.setItem('18nextLng', lng)
   };
   const currentLang = i18n.language.split("-")[0];
   return (

@@ -11,13 +11,12 @@ export default function Navbar() {
   const navItems = [
     { key: "home", label: t("nav.home"), path: "/" },
     { key: "events", label: t("nav.events"), path: "/events" },
-    { key: "community", label: t("nav.community"), path: "/community" },
+    // { key: "community", label: t("nav.community"), path: "/communiqty" },
     { key: "resources", label: t("nav.resources"), path: "/resources" },
     { key: "about", label: t("nav.about"), path: "/about" },
     { key: "createEvent", label: t("nav.createEvent"), path: "/createEvent" },
   ];
 
- 
   return (
     <motion.nav
       initial={{ y: -60, opacity: 0 }}
@@ -60,7 +59,7 @@ export default function Navbar() {
             </NavLink>
           ))}
 
-         <LanguageSelector/>
+          <LanguageSelector />
         </div>
         <div className="md:hidden">
           <button
@@ -126,7 +125,7 @@ export default function Navbar() {
                   {item.label}
                 </NavLink>
               ))}
-             
+              <LanguageSelector />
             </div>
           </motion.div>
         )}

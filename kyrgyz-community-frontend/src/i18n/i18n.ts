@@ -14,11 +14,13 @@ detector.addDetector({
   },
   cacheUserLanguage() {},
 });
-
+const savedLang = localStorage.getItem("i18nextLng");
+const defaultLang = savedLang || "en";
 i18n
   .use(detector)
   .use(initReactI18next)
   .init({
+    lng: defaultLang,
     fallbackLng: "en",
     debug: false,
     detection: {
@@ -26,6 +28,7 @@ i18n
       caches: ["localStorage"],
     },
     interpolation: { escapeValue: false },
+
     resources: {
       en: {
         translation: en,

@@ -3,25 +3,19 @@ import { Row, Col, Spin } from "antd";
 import EventCard from "../components/EventCard";
 import Container from "../components/Container";
 import { useEventsStore } from "../store/useEventsStore";
+import { useTranslation } from "react-i18next";
 
 export default function Events() {
   const { events, loading, fetchEvents } = useEventsStore();
-  // const [selectedCity, setSelectedCity] = useState<string>("All Cities");
-
+  const { t } = useTranslation();
   useEffect(() => {
     fetchEvents();
   }, [fetchEvents]);
 
-  // const uniqueCities = [
-  //   "All Cities",
-  //   ...Array.from(new Set(events.map((e) => e.city))),
-  // ];
-
- 
   if (loading)
     return (
       <div className="flex justify-center items-center min-h-screen">
-        <Spin size="large"  />
+        <Spin size="large" />
       </div>
     );
   return (
@@ -29,11 +23,10 @@ export default function Events() {
       <section className="py-16 bg-gray-50 min-h-screen pt-24">
         <div className="text-center mb-12">
           <h1 className="text-5xl font-extrabold text-red-700 drop-shadow-sm">
-            Upcoming Events
+            {t("events.title")}{" "}
           </h1>
           <p className="mt-4 text-gray-600 text-lg max-w-2xl mx-auto">
-            Discover celebrations, concerts, sports tournaments, and cultural
-            gatherings of the Kyrgyz diaspora across the United States.
+            {t("events.description")}{" "}
           </p>
         </div>
 
