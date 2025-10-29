@@ -13,6 +13,7 @@ export default function Navbar() {
     { key: "events", label: t("nav.events"), path: "/events" },
     // { key: "community", label: t("nav.community"), path: "/communiqty" },
     { key: "resources", label: t("nav.resources"), path: "/resources" },
+    { key: "donations", label: "Dontaions and Support", path: "/donations" },
     { key: "about", label: t("nav.about"), path: "/about" },
     { key: "createEvent", label: t("nav.createEvent"), path: "/createEvent" },
   ];

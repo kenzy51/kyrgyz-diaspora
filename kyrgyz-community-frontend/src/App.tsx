@@ -8,6 +8,7 @@ import Resources from "./pages/Resources";
 import Community from "./pages/Community";
 import Footer from "./components/footer/Footer";
 import { ToastContainer } from "react-toastify";
+import Donations from "./pages/Donations";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/createEvent" element={<CreateEventPage />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/community" element={<Community />} />
+          <Route path="/donations" element={<Donations />} />
         </Routes>
       </main>
       <Footer />
