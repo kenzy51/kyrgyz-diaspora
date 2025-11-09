@@ -4,6 +4,8 @@ import { AppService } from "./app.service";
 import { ConfigModule } from "@nestjs/config";
 import { MongooseModule } from "@nestjs/mongoose";
 import { EventsModule } from "./events/event.module";
+import { UsersModule } from "./users/user.module";
+import { AuthModule } from "./auth/auth.module";
 @Module({
   controllers: [AppController],
   providers: [AppService],
@@ -14,6 +16,8 @@ import { EventsModule } from "./events/event.module";
     // @ts-ignore
     MongooseModule.forRoot(process.env.MONGO_URL),
     EventsModule,
+    UsersModule,
+    AuthModule
   ],
 })
 export class AppModule {}
