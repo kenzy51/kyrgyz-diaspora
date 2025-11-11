@@ -8,7 +8,7 @@ export class User  {
   name!: string;  
 
   @Prop({ required: false, unique: true, sparse:true })
-  email!: string;
+  email?: string;
 
   @Prop({ required: true, unique:true })
   phone!: string;

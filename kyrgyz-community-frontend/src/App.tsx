@@ -10,6 +10,7 @@ import { ToastContainer } from "react-toastify";
 import Donations from "./pages/Donations";
 import ConsulateInfo from "./pages/ConsulServices";
 import ResourcesPage from "./pages/Resources";
+import AuthPage from "./pages/AuthPage";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/community" element={<Community />} />
           <Route path="/donations" element={<Donations />} />
           <Route path="/consulate-info" element={<ConsulateInfo />} />
+          <Route path="/auth" element={<AuthPage />} />
         </Routes>
       </main>
       <Footer />

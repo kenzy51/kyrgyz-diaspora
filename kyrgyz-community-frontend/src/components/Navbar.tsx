@@ -17,6 +17,7 @@ export default function Navbar() {
     { key: "donations", label: "Dontaions and Support", path: "/donations" },
     { key: "about", label: t("nav.about"), path: "/about" },
     { key: "createEvent", label: t("nav.createEvent"), path: "/createEvent" },
+    { key: "auth", label: t("nav.auth"), path: "/auth" },
   ];
 
   return (
