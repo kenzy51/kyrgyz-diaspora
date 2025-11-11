@@ -9,6 +9,7 @@ interface UserType {
   name: string;
   phone: string;
   password: string;
+  email?:string;
 }
 
 const AuthPage: React.FC = () => {
@@ -23,6 +24,7 @@ const AuthPage: React.FC = () => {
         name: values.name,
         phone: values.phone,
         password: values.password,
+        email: "",
       });
     }
   };

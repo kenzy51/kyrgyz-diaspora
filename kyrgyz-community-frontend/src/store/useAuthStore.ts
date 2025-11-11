@@ -18,6 +18,7 @@ interface AuthState {
     name: string;
     phone: string;
     password: string;
+    email?:string;
   }) => Promise<void>;
   login: (credentials: { phone: string; password: string }) => Promise<void>;
   logout: () => void;

@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable, UnauthorizedException } from "@nestjs/common";
+import {
+  BadRequestException,
+  Injectable,
+  UnauthorizedException,
+} from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
@@ -21,7 +25,12 @@ export class AuthService {
     }
     const hash = await bcrypt.hash(dto.password, 10);
     const user = await this.userModel.create({ ...dto, password: hash });
-    const token = this.jwt.sign({ id: user._id, email: user.email });
+    const token = this.jwt.sign({
+      id: user._id,
+      email: user.email,
+      phone: user.phone,
+      name: user.name,
+    });
     return { token, user };
   }
 
