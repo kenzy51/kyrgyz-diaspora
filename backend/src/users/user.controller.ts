@@ -6,6 +6,8 @@ import {
   Put,
   Delete,
   Param,
+  UseGuards,
+  Req,
 } from "@nestjs/common";
 import {
   ApiTags,
@@ -18,11 +20,15 @@ import {
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UsersService } from "./user.service";
 import { User } from "./schemas/user.schema";
+import { JwtAuthGuard } from "../auth/jwt.guard";
 
 @ApiTags("User")
 @Controller("User")
 export class UserController {
-  constructor(private readonly UserService: UsersService) {}
+  constructor(
+    private readonly UserService: UsersService,
+    private jwt: JwtAuthGuard
+  ) {}
 
   // --- CREATE User ---
   @Post()
@@ -72,4 +78,9 @@ export class UserController {
     return this.UserService.delete(id);
   }
 
+  @UseGuards(JwtAuthGuard)
+  @Get("me")
+  async getProfile(@Req() req: any) {
+    return await this.UserService.findById(req.user.id);
+  }
 }
