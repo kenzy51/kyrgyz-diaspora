@@ -18,7 +18,7 @@ interface AuthState {
     name: string;
     phone: string;
     password: string;
-    email?:string;
+    email?: string;
   }) => Promise<void>;
   login: (credentials: { phone: string; password: string }) => Promise<void>;
   logout: () => void;
@@ -29,43 +29,50 @@ export const useAuthStore = create<AuthState>((set) => ({
   user: null,
   loading: false,
 
+ login: async (credentials) => {
+  set({ loading: true });
+  try {
+    const { data } = await api.post("/auth/login", credentials);
+    const { token } = data;  // login might return partial user, ignore it
 
-  register: async (newUser) => {
-    set({ loading: true });
-    try {
-      const { data } = await api.post("/auth/register", newUser);
-      const { token, user } = data;
-      localStorage.setItem("token", token);
-      api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-      set({ user });
-      toast.success("Successfully registered!");
-    //   successChime();
-    } catch (error: any) {
-      const msg = error?.response?.data?.message || "Registration failed";
-      toast.error(msg);
-    } finally {
-      set({ loading: false });
-    }
-  },
+    localStorage.setItem("token", token);
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-  login: async (credentials) => {
-    set({ loading: true });
-    try {
-      const { data } = await api.post("/auth/login", credentials);
-      const { token, user } = data;
+    // NOW fetch full profile
+    const profileRes = await api.get("/user/me");
+    set({ user: profileRes.data });
 
-      localStorage.setItem("token", token);
-      api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-      set({ user });
-      toast.success("Logged in successfully!");
-      successChime();
-    } catch (error: any) {
-      const msg = error?.response?.data?.message || "Login failed";
-      toast.error(msg);
-    } finally {
-      set({ loading: false });
-    }
-  },
+    toast.success("Logged in successfully!");
+    successChime();
+  } catch (error: any) {
+    const msg = error?.response?.data?.message || "Login failed";
+    toast.error(msg);
+  } finally {
+    set({ loading: false });
+  }
+},
+
+register: async (newUser) => {
+  set({ loading: true });
+  try {
+    const { data } = await api.post("/auth/register", newUser);
+    const { token } = data;
+
+    localStorage.setItem("token", token);
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+    // Fetch full profile after register too
+    const profileRes = await api.get("/user/me");
+    set({ user: profileRes.data });
+
+    toast.success("Successfully registered!");
+  } catch (error: any) {
+    const msg = error?.response?.data?.message || "Registration failed";
+    toast.error(msg);
+  } finally {
+    set({ loading: false });
+  }
+},
 
   // ✅ Logout
   logout: () => {
@@ -74,20 +81,23 @@ export const useAuthStore = create<AuthState>((set) => ({
     set({ user: null });
     toast.info("Logged out");
   },
+checkAuth: async () => {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    set({ user: null });
+    return;
+  }
 
-  checkAuth: async () => {
-    const token = localStorage.getItem("token");
-    if (!token) return;
+  api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-
-    try {
-      const { data } = await api.get("/auth/me"); 
-      set({ user: data });
-    } catch {
-      localStorage.removeItem("token");
-      delete api.defaults.headers.common["Authorization"];
-      set({ user: null });
-    }
-  },
+  try {
+    const { data } = await api.get("/user/me");  // ← Correct path
+    set({ user: data });
+  } catch (error) {
+    console.log("Invalid token - logging out", error);
+    localStorage.removeItem("token");
+    delete api.defaults.headers.common["Authorization"];
+    set({ user: null });
+  }
+},
 }));

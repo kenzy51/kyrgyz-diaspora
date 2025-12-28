@@ -13,7 +13,7 @@ import { AuthModule } from "./auth/auth.module";
     ConfigModule.forRoot({
       envFilePath: ".env",
     }),
-    // @ts-ignore
+    // @ts-ignore-
     MongooseModule.forRoot(process.env.MONGO_URL),
     EventsModule,
     UsersModule,

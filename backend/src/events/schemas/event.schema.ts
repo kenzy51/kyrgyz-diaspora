@@ -1,20 +1,34 @@
+// src/events/schemas/event.schema.ts
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { Document } from "mongoose";
+import { Document, Types } from "mongoose";
 
 export type EventDocument = Event & Document;
-@Schema()
+
+@Schema({ timestamps: true })
 export class Event {
-  @Prop({ required: true, type: String })
+  @Prop({ required: true })
   title!: string;
 
-  @Prop({ required: true, type: String })
-  date!: string;
+  @Prop({ required: true })
+  date!: string; 
 
-  @Prop()
-  location!: string;
-  @Prop()
+  @Prop({ required: true })
   city!: string;
 
+  @Prop({ required: true })
+  location!: string;
+
+  // Creator info — automatically filled from JWT
+  @Prop({ required: true })
+  creatorName!: string;
+
+  @Prop({ required: true })
+  creatorPhone!: string;
+
+  @Prop({ type: Types.ObjectId, ref: "User", required: true })
+  creatorId!: Types.ObjectId;
+
+  // 
   @Prop({
     type: String,
     enum: ["pending", "approved", "rejected"],

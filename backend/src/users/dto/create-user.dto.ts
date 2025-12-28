@@ -17,13 +17,6 @@ export class CreateUserDto {
   readonly phone!: string;
 
   @ApiProperty({
-    example: "kanat@example.com",
-    description: "Email address of the user",
-  })
-  @IsEmail()
-  readonly email!: string;
-
-  @ApiProperty({
     example: "securePassword123",
     description: "Password for user account (min 6 characters)",
   })

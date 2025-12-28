@@ -11,13 +11,19 @@ import Donations from "./pages/Donations";
 import ConsulateInfo from "./pages/ConsulServices";
 import ResourcesPage from "./pages/Resources";
 import AuthPage from "./pages/AuthPage";
+import Dashboard from "./pages/Dashboard";
+import { useAuthStore } from "./store/useAuthStore";
+import { useEffect } from "react";
 
 function App() {
+  const checkAuth = useAuthStore((s) => s.checkAuth);
+  useEffect(() => {
+    checkAuth();
+  }, []);
   return (
     <div>
       <Navbar />
       <ToastContainer position="top-right" autoClose={3000} theme="colored" />
-
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -26,6 +32,7 @@ function App() {
           <Route path="/createEvent" element={<CreateEventPage />} />
           <Route path="/resources" element={<ResourcesPage />} />
           <Route path="/community" element={<Community />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/donations" element={<Donations />} />
           <Route path="/consulate-info" element={<ConsulateInfo />} />
           <Route path="/auth" element={<AuthPage />} />

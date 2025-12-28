@@ -8,6 +8,7 @@ import {
   Param,
   UseGuards,
   Req,
+  UnauthorizedException,
 } from "@nestjs/common";
 import {
   ApiTags,
@@ -23,12 +24,9 @@ import { User } from "./schemas/user.schema";
 import { JwtAuthGuard } from "../auth/jwt.guard";
 
 @ApiTags("User")
-@Controller("User")
+@Controller("user")
 export class UserController {
-  constructor(
-    private readonly UserService: UsersService,
-    private jwt: JwtAuthGuard
-  ) {}
+  constructor(private readonly UserService: UsersService) {}
 
   // --- CREATE User ---
   @Post()
@@ -47,7 +45,15 @@ export class UserController {
   getAll() {
     return this.UserService.findAll();
   }
-
+  @UseGuards(JwtAuthGuard)
+  @Get("me")
+  async getProfile(@Req() req: any) {
+    const userId = req.user.sub; 
+    if (!userId) {
+      throw new UnauthorizedException("Invalid token payload");
+    }
+    return this.UserService.findById(userId);
+  }
   // --- GET User BY ID ---
   @Get(":id")
   @ApiOperation({ summary: "Get an User by ID" })
@@ -76,11 +82,5 @@ export class UserController {
   @ApiNotFoundResponse({ description: "User with the specified ID not found" })
   deleteUser(@Param("id") id: string) {
     return this.UserService.delete(id);
-  }
-
-  @UseGuards(JwtAuthGuard)
-  @Get("me")
-  async getProfile(@Req() req: any) {
-    return await this.UserService.findById(req.user.id);
   }
 }

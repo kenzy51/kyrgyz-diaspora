@@ -1,5 +1,6 @@
 import axios from "axios";
+console.log("Loaded API URL:", import.meta.env.VITE_API_URL); // Debug line
 
 export const api = axios.create({
-  baseURL: import.meta.env.NEXT_PUBLIC_API_URL || "https://backend-diaspora.onrender.com/",
+  baseURL: import.meta.env.VITE_API_URL,
 });

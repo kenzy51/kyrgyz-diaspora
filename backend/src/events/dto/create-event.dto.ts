@@ -1,11 +1,6 @@
+// src/events/dto/create-event.dto.ts
 import { ApiProperty } from "@nestjs/swagger";
-import {
-  IsString,
-  IsDateString,
-  IsBoolean,
-  IsOptional,
-  IsIn,
-} from "class-validator";
+import { IsString, IsDateString } from "class-validator";
 
 export class CreateEventDto {
   @ApiProperty({
@@ -17,31 +12,22 @@ export class CreateEventDto {
 
   @ApiProperty({
     example: "2025-11-15T19:00:00.000Z",
-    description: "The date and time of the event (ISO 8601 format)",
+    description: "The date and time of the event in ISO 8601 format",
   })
   @IsDateString()
   readonly date!: string;
 
   @ApiProperty({
     example: "New York",
-    description: "Location where the event will be held",
+    description: "City where the event will take place",
   })
   @IsString()
   readonly city!: string;
+
   @ApiProperty({
-    example: "Brooklyn, neptune av 1432",
-    description: "Location where the event will be held",
+    example: "Brooklyn Community Center, 1829 E 13th St",
+    description: "Specific venue or address of the event",
   })
   @IsString()
   readonly location!: string;
-
-  @ApiProperty({
-    example: "pending",
-    description: "The current status of the event",
-    enum: ["pending", "approved", "rejected"],
-    default: "pending",
-  })
-  @IsOptional()
-  @IsIn(["pending", "approved", "rejected"])
-  readonly status?: string;
 }

@@ -1,3 +1,4 @@
+// src/events/event.service.ts
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
@@ -6,23 +7,24 @@ import { Event, EventDocument } from "./schemas/event.schema";
 
 @Injectable()
 export class EventsService {
-  constructor(
-    @InjectModel(Event.name) private eventModel: Model<EventDocument>
-  ) {}
+  constructor(@InjectModel(Event.name) private eventModel: Model<EventDocument>) {}
 
-  // --- CREATE EVENT ---
-  async create(dto: CreateEventDto): Promise<Event> {
-    const event = await this.eventModel.create({ ...dto });
-    return event;
-  }
+async create(dto: CreateEventDto, user: any): Promise<Event> {
+  const eventData = {
+    ...dto,
+    creatorName: user.name,
+    creatorPhone: user.phone,
+    creatorId: user.sub,  // ← Use sub, not id
+    status: "pending",
+  };
 
-  // --- GET ALL EVENTS ---
+  return this.eventModel.create(eventData);
+}
+
   async findAll(): Promise<Event[]> {
-    const events = await this.eventModel.find();
-    return events;
+    return this.eventModel.find().sort({ createdAt: -1 }); // newest first
   }
 
-  // --- GET EVENT BY ID ---
   async findById(id: string): Promise<Event> {
     const event = await this.eventModel.findById(id);
     if (!event) {
@@ -31,7 +33,6 @@ export class EventsService {
     return event;
   }
 
-  // --- UPDATE EVENT ---
   async update(id: string, dto: CreateEventDto): Promise<Event> {
     const event = await this.eventModel.findByIdAndUpdate(id, dto, { new: true });
     if (!event) {
@@ -40,7 +41,6 @@ export class EventsService {
     return event;
   }
 
-  // --- DELETE EVENT ---
   async delete(id: string): Promise<Event> {
     const event = await this.eventModel.findByIdAndRemove(id);
     if (!event) {
@@ -48,6 +48,4 @@ export class EventsService {
     }
     return event;
   }
-
- 
 }

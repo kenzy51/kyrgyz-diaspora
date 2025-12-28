@@ -30,11 +30,6 @@ export default function Events() {
           </p>
         </div>
 
-        {/* <CityFilter
-          cities={uniqueCities}
-          selectedCity={selectedCity}
-          // onChange={setSelectedCity}
-        /> */}
         <div className="max-w-7xl mx-auto px-4">
           {events.length > 0 ? (
             <Row gutter={[32, 32]}>

@@ -4,20 +4,27 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import unionKg from "../assets/unionKg.png";
 import LanguageSelector from "../utils/ui/LanguageSelector/LanguageSelector";
+import { useAuthStore } from "../store/useAuthStore";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { t } = useTranslation();
-
+  const { user } = useAuthStore();
+  const authItem = user
+    ? {
+        key: "dashboard",
+        label: t("nav.profile") || "Profile",
+        path: "/dashboard",
+      }
+    : { key: "auth", label: t("nav.auth") || "Login", path: "/auth" };
   const navItems = [
     { key: "home", label: t("nav.home"), path: "/" },
     { key: "events", label: t("nav.events"), path: "/events" },
     { key: "consulate", label: t("consulate"), path: "/consulate-info" },
-    // { key: "community", label: t("nav.community"), path: "/communiqty" },
     { key: "resources", label: t("nav.resources"), path: "/resources" },
     { key: "donations", label: "Dontaions and Support", path: "/donations" },
     { key: "about", label: t("nav.about"), path: "/about" },
     { key: "createEvent", label: t("nav.createEvent"), path: "/createEvent" },
-    { key: "auth", label: t("nav.auth"), path: "/auth" },
+    authItem,
   ];
 
   return (
