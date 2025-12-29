@@ -41,7 +41,6 @@ const AuthPage: React.FC = () => {
           name: values.name || "",
           phone: values.phone,
           password: values.password,
-          email: values.email || "",
         });
       }
     } catch (err) {
