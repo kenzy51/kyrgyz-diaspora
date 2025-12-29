@@ -3,10 +3,12 @@ import { useAuthStore } from "../store/useAuthStore";
 import { useNavigate } from "react-router-dom";
 import { Button, Card, Avatar, Typography } from "antd";
 import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
+import { useTranslation } from "react-i18next";
 
 const { Title, Text } = Typography;
 
 const Dashboard = () => {
+  const { t } = useTranslation();
   const { user, logout } = useAuthStore();
   const navigate = useNavigate();
 
@@ -14,13 +16,16 @@ const Dashboard = () => {
     logout();
     navigate("/");
   };
+  console.log(user);
+  const activityParagraphs = t("dashboard.activityText", "").split("<br />");
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-2xl mx-auto">
-        <br />
-        <br />
-        <Card className="shadow-2xl rounded-3xl border-0 overflow-hidden">
+        <Card
+          variant="outlined" // ← NEW: replaces bordered={false}
+          className="shadow-2xl rounded-3xl overflow-hidden"
+        >
           <div className="text-center py-12 px-8">
             <Avatar
               size={100}
@@ -28,19 +33,29 @@ const Dashboard = () => {
               className="mb-6 bg-red-600 text-white text-4xl shadow-xl border-4 border-white"
             />
 
-            <Title level={1} className="!text-4xl !font-extrabold !text-gray-900 !mb-3">
-              Welcome back, {user?.name || "User"}! 👋
+            <Title
+              level={1}
+              className="!text-4xl !font-extrabold !text-gray-900 !mb-3"
+            >
+              {t("dashboard.welcome")}
+              <br />
+              {user && user?.name}
             </Title>
 
-            <Text type="secondary" className="text-lg block mb-10 text-gray-600">
-              You're successfully logged into the Kyrgyz Diaspora community platform.
+            <Text
+              type="secondary"
+              className="text-lg block mb-10 text-gray-600"
+            >
+              {t("dashboard.loggedInMessage")}
             </Text>
 
             {/* User Info Box */}
             <div className="bg-gray-50 rounded-2xl p-8 mx-auto max-w-md">
               <div className="space-y-5 text-left">
                 <div className="flex justify-between items-center">
-                  <Text strong className="text-gray-700">Phone Number</Text>
+                  <Text strong className="text-gray-700">
+                    {t("dashboard.phoneNumber")}
+                  </Text>
                   <Text className="font-medium text-gray-900">
                     {user?.phone || "Not provided"}
                   </Text>
@@ -48,7 +63,9 @@ const Dashboard = () => {
 
                 {user?._id && (
                   <div className="flex justify-between items-center">
-                    <Text strong className="text-gray-700">User ID</Text>
+                    <Text strong className="text-gray-700">
+                      {t("dashboard.userId")}
+                    </Text>
                     <Text className="text-xs font-mono bg-gray-200 px-3 py-1 rounded-lg">
                       {user._id}
                     </Text>
@@ -56,8 +73,12 @@ const Dashboard = () => {
                 )}
 
                 <div className="pt-5 border-t border-gray-300 text-center">
-                  <Text type="success" strong className="text-green-600 text-lg">
-                    ✓ Full profile loaded
+                  <Text
+                    type="success"
+                    strong
+                    className="text-green-600 text-lg"
+                  >
+                    {t("dashboard.profileLoaded")}
                   </Text>
                 </div>
               </div>
@@ -73,25 +94,28 @@ const Dashboard = () => {
                 onClick={handleLogout}
                 className="px-12 py-6 text-lg font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200"
               >
-                Sign Out
+                {t("dashboard.signOut")}
               </Button>
             </div>
           </div>
         </Card>
 
-        {/* Future Activity Section */}
+        {/* Your Activity Section */}
         <div className="mt-20 text-center">
           <Title level={2} className="!text-3xl !font-bold !text-gray-800 mb-6">
-            Your Activity
+            {t("dashboard.yourActivity")}
           </Title>
 
           <div className="bg-white rounded-2xl shadow-lg p-10 max-w-3xl mx-auto">
-            <Text className="text-xl text-gray-600 leading-relaxed">
-              Events you've joined, donations made, and community updates will appear here soon.<br />
-              We're building tools to help Kyrgyz people in New York stay connected and support each other.
+            <Text className="text-xl text-gray-600 leading-relaxed block space-y-4">
+              {activityParagraphs.map((paragraph, index) => (
+                <span key={index} className="block">
+                  {paragraph}
+                </span>
+              ))}
             </Text>
 
-            <div className="mt-8 text-2xl">🇰🇬 Coming soon...</div>
+            <div className="mt-8 text-2xl">{t("dashboard.comingSoon")}</div>
           </div>
         </div>
       </div>

@@ -1,166 +1,10 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-// import React, { useState } from "react";
-// import { Form, Input, Button, Typography, Card } from "antd";
-// import { useAuthStore } from "../store/useAuthStore";
-// import { motion, AnimatePresence } from "framer-motion";
-
-// const { Title, Text } = Typography;
-
-// interface UserType {
-//   name: string;
-//   phone: string;
-//   password: string;
-//   email?:string;
-// }
-
-// const AuthPage: React.FC = () => {
-//   const { register, login, loading } = useAuthStore();
-//   const [isLogin, setIsLogin] = useState(true);
-
-//   const onFinish = async (values: UserType) => {
-//     if (isLogin) {
-//       await login({ phone: values.phone, password: values.password });
-//     } else {
-//       await register({
-//         name: values.name,
-//         phone: values.phone,
-//         password: values.password,
-//         email: "",
-//       });
-//     }
-//   };
-
-//   return (
-//     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 px-4">
-//       <Card
-//         style={{
-//           width: "100%",
-//           maxWidth: 400,
-//           borderRadius: 16,
-//           boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
-//         }}
-//       >
-//         <AnimatePresence mode="wait">
-//           <motion.div
-//             key={isLogin ? "login" : "register"}
-//             initial={{ opacity: 0, y: 30 }}
-//             animate={{ opacity: 1, y: 0 }}
-//             exit={{ opacity: 0, y: -20 }}
-//             transition={{ duration: 0.4 }}
-//           >
-//             <div className="text-center mb-8">
-//               <Title
-//                 level={2}
-//                 className="!text-red-700 !mb-2"
-//                 style={{ fontWeight: 800 }}
-//               >
-//                 {isLogin ? "Welcome Back 👋" : "Join Our Community ❤️"}
-//               </Title>
-//               <Text type="secondary">
-//                 {isLogin
-//                   ? "Log in to continue exploring events and donations"
-//                   : "Create an account to join our growing diaspora platform"}
-//               </Text>
-//             </div>
-
-//             <Form
-//               layout="vertical"
-//               onFinish={onFinish}
-//               autoComplete="off"
-//               requiredMark={false}
-//             >
-//               {!isLogin && (
-//                 <Form.Item
-//                   label={
-//                     <span className="font-medium text-gray-700">Full Name</span>
-//                   }
-//                   name="name"
-//                   rules={[
-//                     { required: true, message: "Please enter your full name" },
-//                   ]}
-//                 >
-//                   <Input
-//                     placeholder="e.g. Kanat Nazarov"
-//                     size="large"
-//                     className="rounded-md"
-//                   />
-//                 </Form.Item>
-//               )}
-
-//               <Form.Item
-//                 label={
-//                   <span className="font-medium text-gray-700">
-//                     Phone Number
-//                   </span>
-//                 }
-//                 name="phone"
-//                 rules={[
-//                   { required: true, message: "Please enter your phone number" },
-//                 ]}
-//               >
-//                 <Input
-//                   placeholder="+1 (929) 325-9094"
-//                   size="large"
-//                   className="rounded-md"
-//                 />
-//               </Form.Item>
-
-//               <Form.Item
-//                 label={
-//                   <span className="font-medium text-gray-700">
-//                     {isLogin ? "Password" : "Create a Password"}
-//                   </span>
-//                 }
-//                 name="password"
-//                 rules={[
-//                   { required: true, message: "Please enter your password" },
-//                 ]}
-//               >
-//                 <Input.Password
-//                   placeholder="••••••••"
-//                   size="large"
-//                   className="rounded-md"
-//                 />
-//               </Form.Item>
-
-//               <Button
-//                 type="primary"
-//                 htmlType="submit"
-//                 loading={loading}
-//                 size="large"
-//                 className="w-full bg-red-700 hover:bg-red-800 font-semibold rounded-md"
-//               >
-//                 {isLogin ? "Login" : "Register"}
-//               </Button>
-//             </Form>
-
-//             <div className="text-center mt-6">
-//               <Text type="secondary">
-//                 {isLogin
-//                   ? "Don’t have an account?"
-//                   : "Already have an account?"}{" "}
-//                 <Button
-//                   type="link"
-//                   onClick={() => setIsLogin(!isLogin)}
-//                   className="text-red-600 font-semibold hover:underline !p-0"
-//                 >
-//                   {isLogin ? "Register" : "Login"}
-//                 </Button>
-//               </Text>
-//             </div>
-//           </motion.div>
-//         </AnimatePresence>
-//       </Card>
-//     </div>
-//   );
-// };
-
-// export default AuthPage;
+// AuthPage.tsx
 import React, { useEffect } from "react";
 import { Form, Input, Button, Typography, Card, Spin } from "antd";
 import { useAuthStore } from "../store/useAuthStore";
 import { motion, AnimatePresence } from "framer-motion";
-import { useNavigate } from "react-router-dom"; // ← Make sure you use react-router
+import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const { Title, Text } = Typography;
 
@@ -172,9 +16,11 @@ interface UserType {
 }
 
 const AuthPage: React.FC = () => {
+  const { t } = useTranslation();
   const { register, login, loading, user, checkAuth } = useAuthStore();
   const [isLogin, setIsLogin] = React.useState(true);
   const navigate = useNavigate();
+  const [form] = Form.useForm();
 
   useEffect(() => {
     checkAuth();
@@ -182,7 +28,7 @@ const AuthPage: React.FC = () => {
 
   useEffect(() => {
     if (user) {
-      navigate("/dashboard"); 
+      navigate("/dashboard");
     }
   }, [user, navigate]);
 
@@ -198,25 +44,21 @@ const AuthPage: React.FC = () => {
           email: values.email || "",
         });
       }
-
-      // After success: checkAuth will run via useEffect → redirect
     } catch (err) {
-      // Error already handled in store with toast
+      console.log(err);
     }
   };
 
-  // Show loading spinner while checking auth on page load
   if (loading && !user) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="flex items-center justify-center min-h-screen bg-gray-50">
         <Spin size="large" />
       </div>
     );
   }
 
-  // If user exists → don't show login form at all
   if (user) {
-    return null; // or a small "Redirecting..." message
+    return null;
   }
 
   return (
@@ -238,43 +80,91 @@ const AuthPage: React.FC = () => {
             transition={{ duration: 0.4 }}
           >
             <div className="text-center mb-8">
-              <Title level={2} className="!text-red-700 !mb-2" style={{ fontWeight: 800 }}>
-                {isLogin ? "Welcome Back 👋" : "Join Our Community ❤️"}
+              <Title
+                level={2}
+                className="!text-red-700 !mb-2"
+                style={{ fontWeight: 800 }}
+              >
+                {isLogin ? t("auth.welcomeBack") : t("auth.joinCommunity")}
               </Title>
               <Text type="secondary">
-                {isLogin
-                  ? "Log in to continue exploring events and donations"
-                  : "Create an account to join our growing diaspora platform"}
+                {isLogin ? t("auth.loginSubtitle") : t("auth.registerSubtitle")}
               </Text>
             </div>
 
-            <Form layout="vertical" onFinish={onFinish} autoComplete="off" requiredMark={false}>
+            <Form
+              layout="vertical"
+              onFinish={onFinish}
+              form={form}
+              autoComplete="off"
+              requiredMark={false}
+            >
               {!isLogin && (
                 <Form.Item
-                  label={<span className="font-medium text-gray-700">Full Name</span>}
+                  label={
+                    <span className="font-medium text-gray-700">
+                      {t("auth.fullName")}
+                    </span>
+                  }
                   name="name"
-                  rules={[{ required: true, message: "Please enter your full name" }]}
+                  rules={[
+                    {
+                      required: true,
+                      message:
+                        t("auth.enterTitle") || "Please enter your full name",
+                    },
+                  ]}
                 >
-                  <Input placeholder="e.g. Kanat Nazarov" size="large" className="rounded-md" />
+                  <Input
+                    placeholder={t("auth.placeholderName")}
+                    size="large"
+                    className="rounded-md"
+                  />
                 </Form.Item>
               )}
 
               <Form.Item
-                label={<span className="font-medium text-gray-700">Phone Number</span>}
+                label={
+                  <span className="font-medium text-gray-700">
+                    {t("auth.phoneNumber")}
+                  </span>
+                }
                 name="phone"
-                rules={[{ required: true, message: "Please enter your phone number" }]}
+                rules={[
+                  {
+                    required: true,
+                    message:
+                      t("auth.enterPhone") || "Please enter your phone number",
+                  },
+                ]}
               >
-                <Input placeholder="+1 (929) 325-9094" size="large" className="rounded-md" />
+                <Input
+                  placeholder={t("auth.placeholderPhone")}
+                  size="large"
+                  className="rounded-md"
+                />
               </Form.Item>
 
               <Form.Item
-                label={<span className="font-medium text-gray-700">
-                  {isLogin ? "Password" : "Create a Password"}
-                </span>}
+                label={
+                  <span className="font-medium text-gray-700">
+                    {isLogin ? t("auth.password") : t("auth.createPassword")}
+                  </span>
+                }
                 name="password"
-                rules={[{ required: true, message: "Please enter your password" }]}
+                rules={[
+                  {
+                    required: true,
+                    message:
+                      t("auth.enterPassword") || "Please enter your password",
+                  },
+                ]}
               >
-                <Input.Password placeholder="••••••••" size="large" className="rounded-md" />
+                <Input.Password
+                  placeholder={t("auth.placeholderPassword")}
+                  size="large"
+                  className="rounded-md"
+                />
               </Form.Item>
 
               <Button
@@ -282,21 +172,27 @@ const AuthPage: React.FC = () => {
                 htmlType="submit"
                 loading={loading}
                 size="large"
-                className="w-full bg-red-700 hover:bg-red-800 font-semibold rounded-md"
+                block
+                className="bg-red-700 hover:bg-red-800 font-semibold rounded-md h-12"
               >
-                {isLogin ? "Login" : "Register"}
+                {isLogin ? t("auth.login") : t("auth.register")}
               </Button>
             </Form>
 
             <div className="text-center mt-6">
               <Text type="secondary">
-                {isLogin ? "Don’t have an account?" : "Already have an account?"}{" "}
+                {isLogin ? t("auth.noAccount") : t("auth.hasAccount")}{" "}
                 <Button
                   type="link"
-                  onClick={() => setIsLogin(!isLogin)}
+                  onClick={() => {
+                    setIsLogin(!isLogin);
+                    form.resetFields();
+                  }}
                   className="text-red-600 font-semibold hover:underline !p-0"
                 >
-                  {isLogin ? "Register" : "Login"}
+                  {isLogin
+                    ? t("auth.switchToRegister")
+                    : t("auth.switchToLogin")}
                 </Button>
               </Text>
             </div>

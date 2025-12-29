@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useEffect } from "react";
 import { Row, Col, Spin } from "antd";
 import EventCard from "../components/EventCard";
@@ -35,6 +36,7 @@ export default function Events() {
             <Row gutter={[32, 32]}>
               {events.map((e, i) => (
                 <Col key={i} xs={24} sm={12} md={8}>
+                  {/* @ts-ignore */}
                   <EventCard location={""} image={""} {...e} />
                 </Col>
               ))}

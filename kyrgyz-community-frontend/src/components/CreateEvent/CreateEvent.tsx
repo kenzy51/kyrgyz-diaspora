@@ -21,18 +21,22 @@ const { Option } = Select;
 export default function CreateEvent() {
   const { t } = useTranslation();
   const { createEvent, loading } = useEventsStore();
-  const { user } = useAuthStore(); 
+  const { user } = useAuthStore();
   const [form] = Form.useForm();
   const navigate = useNavigate();
 
+  // If not logged in → show login required
   if (!user) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 flex items-center justify-center py-16 px-4">
         <Card className="max-w-md mx-auto text-center shadow-2xl rounded-3xl p-10">
           <Result
             status="403"
-            title="Login Required"
-            subTitle="You must be logged in to create a community event."
+            title={t("createEvent.loginRequired") || "Login Required"}
+            subTitle={
+              t("createEvent.loginSubtitle") ||
+              "You must be logged in to create a community event."
+            }
             extra={
               <Button
                 type="primary"
@@ -40,12 +44,13 @@ export default function CreateEvent() {
                 className="mt-6 bg-red-600 hover:bg-red-700"
                 onClick={() => navigate("/auth")}
               >
-                Go to Login
+                {t("createEvent.goToLogin") || "Go to Login"}
               </Button>
             }
           />
           <Text type="secondary" className="block mt-6">
-            After logging in, you can share events with the Kyrgyz diaspora!
+            {t("createEvent.loginHint") ||
+              "After logging in, you can share events with the Kyrgyz diaspora!"}
           </Text>
         </Card>
       </div>
@@ -59,32 +64,39 @@ export default function CreateEvent() {
       city: values.city,
       location: values.location,
     };
-    await createEvent(payload);
-    form.resetFields();
-    navigate("/events");
+
+    try {
+      await createEvent(payload);
+      form.resetFields();
+      navigate("/events");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 py-16 px-4">
       <div className="max-w-2xl mx-auto">
         <Card className="shadow-2xl rounded-3xl border-0 overflow-hidden">
+          {/* Header */}
           <div className="text-center py-10 px-8 bg-gradient-to-b from-red-50 to-white">
             <Title
               level={1}
               className="!text-4xl !font-bold !text-red-700 !mb-4"
             >
-              Create New Event
+              {t("createEvent.title")}
             </Title>
             <Text className="text-lg text-gray-600">
-              Share your community gathering with Kyrgyz people across the US
+              {t("createEvent.description") ||
+                "Share your community gathering with Kyrgyz people across the US"}
             </Text>
           </div>
 
           <div className="p-8 pt-10">
-            {/* Show who is creating the event */}
-            <div className="bg-green-50 border border-green-200 rounded-xl p-5 mb-8 text-center">
+            {/* Creator Info */}
+            <div className="bg-green-50 border border-green-200 rounded-xl p-6 mb-8 text-center">
               <Text strong className="block text-lg text-green-900">
-                This event will be created by:
+                {t("createEvent.createdBy") || "This event will be created by:"}
               </Text>
               <Text className="text-2xl font-bold text-green-800 mt-2">
                 {user.name}
@@ -94,21 +106,23 @@ export default function CreateEvent() {
               </Text>
             </div>
 
+            {/* Form */}
             <Form layout="vertical" onFinish={onFinish} form={form}>
               <Form.Item
                 name="title"
                 label={
                   <span className="font-semibold text-gray-800">
-                    Event Title <span className="text-red-600">*</span>
+                    {t("createEvent.eventTitle")}{" "}
+                    <span className="text-red-600">*</span>
                   </span>
                 }
                 rules={[
-                  { required: true, message: "Please enter the event title" },
+                  { required: true, message: t("createEvent.enterTitle") },
                 ]}
               >
                 <Input
                   size="large"
-                  placeholder="e.g. Nooruz Celebration in Brooklyn"
+                  placeholder={t("createEvent.enterTitle")}
                   className="rounded-lg"
                 />
               </Form.Item>
@@ -117,18 +131,19 @@ export default function CreateEvent() {
                 name="date"
                 label={
                   <span className="font-semibold text-gray-800">
-                    Date & Time <span className="text-red-600">*</span>
+                    {t("createEvent.date")}{" "}
+                    <span className="text-red-600">*</span>
                   </span>
                 }
                 rules={[
-                  { required: true, message: "Please select date and time" },
+                  { required: true, message: t("createEvent.selectDate") },
                 ]}
               >
                 <DatePicker
                   showTime
                   size="large"
                   className="w-full rounded-lg"
-                  placeholder="Select date and time"
+                  placeholder={t("createEvent.selectDate")}
                 />
               </Form.Item>
 
@@ -136,14 +151,17 @@ export default function CreateEvent() {
                 name="city"
                 label={
                   <span className="font-semibold text-gray-800">
-                    City <span className="text-red-600">*</span>
+                    {t("createEvent.city")}{" "}
+                    <span className="text-red-600">*</span>
                   </span>
                 }
-                rules={[{ required: true, message: "Please select a city" }]}
+                rules={[
+                  { required: true, message: t("createEvent.selectCity") },
+                ]}
               >
                 <Select
                   size="large"
-                  placeholder="Select city"
+                  placeholder={t("createEvent.selectCity")}
                   className="rounded-lg"
                 >
                   <Option value="New York">New York</Option>
@@ -159,16 +177,17 @@ export default function CreateEvent() {
                 name="location"
                 label={
                   <span className="font-semibold text-gray-800">
-                    Venue / Address <span className="text-red-600">*</span>
+                    {t("createEvent.location")}{" "}
+                    <span className="text-red-600">*</span>
                   </span>
                 }
                 rules={[
-                  { required: true, message: "Please enter the location" },
+                  { required: true, message: t("createEvent.enterLocation") },
                 ]}
               >
                 <Input
                   size="large"
-                  placeholder="e.g. 1829 East 13th Street, Brooklyn, NY"
+                  placeholder={t("createEvent.enterLocation")}
                   className="rounded-lg"
                 />
               </Form.Item>
@@ -181,12 +200,13 @@ export default function CreateEvent() {
                 block
                 className="mt-8 h-14 text-xl font-bold rounded-xl bg-red-600 hover:bg-red-700 shadow-lg"
               >
-                Create Event
+                {t("createEvent.createButton")}
               </Button>
             </Form>
 
             <Text type="secondary" className="block text-center mt-6">
-              Your event will be reviewed and published soon.
+              {t("createEvent.reviewNote") ||
+                "Your event will be reviewed and published soon."}
             </Text>
           </div>
         </Card>

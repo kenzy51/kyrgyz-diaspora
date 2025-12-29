@@ -30,7 +30,6 @@ const CommunityComponent: React.FC = () => {
           Our Community
         </h2>
 
-        {/* Swiper Slider */}
         <Swiper
           modules={[Navigation, Pagination, Autoplay]}
           navigation
@@ -50,7 +49,6 @@ const CommunityComponent: React.FC = () => {
           ))}
         </Swiper>
 
-        {/* Grid of community members */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
           {gridPhotos.map((photo, idx) => (
             <div key={idx} className="group relative">

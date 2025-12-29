@@ -1,18 +1,53 @@
-import React, { useState } from "react";
+// ResourcesPage.tsx
+import { useState } from "react";
+import { toast } from "react-toastify";
+import { api } from "../lib/api";
+import { Button, Input } from "antd";
+import { useTranslation } from "react-i18next";
 
 const tabs = [
-  { id: "medical", label: "Медицинская страховка" },
-  { id: "housing", label: "Жильё и работа" },
-  { id: "support", label: "Поддержка и вопросы" },
+  { id: "medical", key: "medical" },
+  { id: "housing", key: "housing" },
+  { id: "support", key: "support" },
 ];
 
 const ResourcesPage = () => {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState("medical");
+  const [question, setQuestion] = useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmitQuestion = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!question.trim()) {
+      toast.error(t("resources.errorMessage"));
+      return;
+    }
+
+    setLoading(true);
+    try {
+      await api.post("/support/question", {
+        question: question.trim(),
+        name: name.trim() || undefined,
+        phone: phone.trim() || undefined,
+      });
+      toast.success(t("resources.successMessage"));
+      setQuestion("");
+      setName("");
+      setPhone("");
+    } catch (error) {
+      toast.error(t("resources.errorMessage"), error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-10 text-gray-800 mt-12.5">
+    <div className="max-w-5xl mx-auto px-4 py-10 text-gray-800 mt-12">
       <h1 className="text-3xl md:text-4xl font-bold text-center mb-8 text-red-700">
-        Полезная информация для кыргызской диаспоры в США
+        {t("resources.title")}
       </h1>
 
       <div className="flex flex-wrap justify-center mb-10 border-b">
@@ -26,62 +61,51 @@ const ResourcesPage = () => {
                 : "text-gray-500 hover:text-red-600"
             }`}
           >
-            {tab.label}
+            {t(`resources.${tab.key}Title`) || t(`resources.${tab.id}`)}
           </button>
         ))}
       </div>
 
-      <div className="mt-6 space-y-4 leading-relaxed">
+      <div className="mt-6 space-y-6 leading-relaxed">
         {activeTab === "medical" && (
           <>
             <h2 className="text-2xl font-semibold mb-3 text-red-600">
-              Медицинская страховка (Health Insurance)
+              {t("resources.medicalTitle")}
             </h2>
-            <p>
-              В США медицинская страховка является необходимостью. Без неё
-              лечение может быть очень дорогим. Для граждан и резидентов
-              доступны государственные и частные программы:
-            </p>
-            <ul className="list-disc list-inside space-y-1">
+            <p>{t("resources.medicalText")}</p>
+            <ul className="list-disc list-inside space-y-2 ml-4">
               <li>
-                <b>Medicaid</b> — бесплатная страховка для людей с низким
-                доходом.
+                <b>Medicaid</b> — {t("resources.medicalList.medicaid")}
               </li>
               <li>
-                <b>Marketplace Insurance</b> — доступна на сайте{" "}
+                <b>Marketplace Insurance</b> —{" "}
+                {t("resources.medicalList.marketplace")}{" "}
                 <a
                   href="https://www.healthcare.gov"
-                  className="text-blue-600 underline"
                   target="_blank"
                   rel="noreferrer"
+                  className="text-blue-600 underline"
                 >
                   healthcare.gov
                 </a>
               </li>
               <li>
-                <b>Emergency Medicaid</b> — для неиммигрантов и ожидающих
-                статуса (например, asylum seekers) при экстренных случаях.
+                <b>Emergency Medicaid</b> —{" "}
+                {t("resources.medicalList.emergency")}
               </li>
             </ul>
-            <p>
-              В крупных городах существуют <b>Community Health Centers</b>, где
-              предоставляют услуги по сниженной цене независимо от статуса.
-            </p>
+            <p>{t("resources.communityCenters")}</p>
           </>
         )}
 
         {activeTab === "housing" && (
           <>
             <h2 className="text-2xl font-semibold mb-3 text-red-600">
-              Жильё и работа
+              {t("resources.housingTitle")}
             </h2>
+            <p>{t("resources.housingText")}</p>
             <p>
-              Здесь скоро появится список ресурсов по поиску жилья, аренде и
-              вакансиям в разных городах США. Мы будем обновлять этот раздел для
-              помощи кыргызстанцам, проживающим в Америке.
-            </p>
-            <p>
-              Временно вы можете пользоваться сайтами:{" "}
+              {t("resources.housingTemp")}{" "}
               <a
                 href="https://www.zillow.com"
                 target="_blank"
@@ -99,7 +123,7 @@ const ResourcesPage = () => {
               >
                 Craigslist
               </a>{" "}
-              и{" "}
+              жана{" "}
               <a
                 href="https://www.indeed.com"
                 target="_blank"
@@ -107,8 +131,8 @@ const ResourcesPage = () => {
                 className="text-blue-600 underline"
               >
                 Indeed
-              </a>{" "}
-              для поиска жилья и работы.
+              </a>
+              .
             </p>
           </>
         )}
@@ -116,25 +140,48 @@ const ResourcesPage = () => {
         {activeTab === "support" && (
           <>
             <h2 className="text-2xl font-semibold mb-3 text-red-600">
-              Поддержка и вопросы
+              {t("resources.supportTitle")}
             </h2>
-            <p>
-              Если у вас есть вопросы к консулу или предложения для сообщества,
-              вы можете оставить их ниже. Мы постараемся передать их
-              представителям консульства и активистам кыргызской диаспоры.
-            </p>
-            <form className="mt-5 bg-gray-50 p-5 rounded-lg shadow-md">
+            <p className="mb-6">{t("resources.supportText")}</p>
+
+            <form
+              onSubmit={handleSubmitQuestion}
+              className="mt-6 bg-gray-50 p-6 rounded-xl shadow-md"
+            >
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <Input
+                  placeholder={t("resources.namePlaceholder")}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="rounded-lg"
+                />
+                <Input
+                  placeholder={t("resources.phonePlaceholder")}
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  className="rounded-lg"
+                />
+              </div>
+
               <textarea
-                placeholder="Ваш вопрос или предложение..."
-                className="w-full p-3 border rounded-lg mb-3"
-                rows={4}
+                value={question}
+                onChange={(e) => setQuestion(e.target.value)}
+                placeholder={t("resources.questionPlaceholder")}
+                className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-red-500 resize-none"
+                rows={6}
+                required
               />
-              <button
-                type="submit"
-                className="bg-red-700 text-white px-6 py-2 rounded-lg hover:bg-red-800 transition"
+
+              <Button
+                type="primary"
+                htmlType="submit"
+                loading={loading}
+                size="large"
+                block
+                className="mt-6 h-12 text-lg font-bold bg-red-700 hover:bg-red-800 rounded-xl shadow-lg"
               >
-                Отправить
-              </button>
+                {t("resources.submitButton")}
+              </Button>
             </form>
           </>
         )}

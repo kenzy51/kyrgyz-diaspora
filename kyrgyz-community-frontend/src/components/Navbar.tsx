@@ -19,9 +19,9 @@ export default function Navbar() {
   const navItems = [
     { key: "home", label: t("nav.home"), path: "/" },
     { key: "events", label: t("nav.events"), path: "/events" },
-    { key: "consulate", label: t("consulate"), path: "/consulate-info" },
+    { key: "consulate", label: t("nav.consulate"), path: "/consulate-info" },
     { key: "resources", label: t("nav.resources"), path: "/resources" },
-    { key: "donations", label: "Dontaions and Support", path: "/donations" },
+    // { key: "donations", label: "Dontaions and Support", path: "/donations" },
     { key: "about", label: t("nav.about"), path: "/about" },
     { key: "createEvent", label: t("nav.createEvent"), path: "/createEvent" },
     authItem,

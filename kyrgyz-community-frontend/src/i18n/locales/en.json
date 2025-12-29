@@ -2,23 +2,32 @@
   "nav": {
     "home": "Home",
     "events": "Events",
+    "consulate": "Consulate",
     "resources": "Resources",
+    "donations": "Donations and Support",
     "about": "About",
     "createEvent": "Create Event",
-    "community": "Community",
-    "unionKg": "Union KG"
+    "profile": "Profile",
+    "auth": "Login"
   },
   "createEvent": {
     "title": "Create New Event",
+    "description": "Share your community gathering with Kyrgyz people across the US",
+    "createdBy": "This event will be created by:",
     "eventTitle": "Event Title",
-    "date": "Date",
+    "date": "Date & Time",
     "city": "City",
-    "location": "Location",
+    "location": "Venue / Address",
     "enterTitle": "Enter event title",
-    "selectDate": "Select date",
+    "selectDate": "Select date and time",
     "selectCity": "Select a city",
-    "enterLocation": "Enter location",
-    "createButton": "Create Event"
+    "enterLocation": "Enter venue or address",
+    "createButton": "Create Event",
+    "reviewNote": "Your event will be reviewed and published soon.",
+    "loginRequired": "Login Required",
+    "loginSubtitle": "You must be logged in to create a community event.",
+    "goToLogin": "Go to Login",
+    "loginHint": "After logging in, you can share events with the Kyrgyz diaspora!"
   },
   "about": {
     "heroTitle": "About Union KG NY",
@@ -94,9 +103,82 @@
       "button": "Add Event"
     }
   },
-  "events":{
-    "title":"Upcoming Events",
-    "description":"Discover celebrations, concerts, sports tournaments, and cultural gatherings of the Kyrgyz diaspora across the United States.",
-    "noEvents":"No events at the moment. Stay tuned for announcements!"
+  "events": {
+    "title": "Upcoming Events",
+    "description": "Discover celebrations, concerts, sports tournaments, and cultural gatherings of the Kyrgyz diaspora across the United States.",
+    "noEvents": "No events at the moment. Stay tuned for announcements!"
+  },
+  "dashboard": {
+    "welcome": "Welcome back 👋",
+    "loggedInMessage": "You're successfully logged into the Kyrgyz Diaspora community platform.",
+    "phoneNumber": "Phone Number",
+    "userId": "User ID",
+    "profileLoaded": "✓ Full profile loaded",
+    "signOut": "Sign Out",
+    "yourActivity": "Your Activity",
+    "activityText": "Events you've joined, donations made, and community updates will appear here soon.<br />We're building tools to help Kyrgyz people in New York stay connected and support each other.",
+    "comingSoon": "🇰🇬 Coming soon..."
+  },
+  "auth": {
+    "welcomeBack": "Welcome Back 👋",
+    "joinCommunity": "Join Our Community ❤️",
+    "loginSubtitle": "Log in to continue exploring events and donations",
+    "registerSubtitle": "Create an account to join our growing diaspora platform",
+    "fullName": "Full Name",
+    "phoneNumber": "Phone Number",
+    "password": "Password",
+    "createPassword": "Create a Password",
+    "login": "Login",
+    "register": "Register",
+    "noAccount": "Don’t have an account?",
+    "hasAccount": "Already have an account?",
+    "switchToRegister": "Register",
+    "switchToLogin": "Login",
+    "placeholderName": "e.g. Kanat Nazarov",
+    "placeholderPhone": "+1 (929) 325-9094",
+    "placeholderPassword": "••••••••"
+  },
+  "whatWeDo": {
+    "title": "What We Do",
+    "description": "Supporting Kyrgyz diaspora through events, resources, and community building.",
+    "eventsTitle": "📅 Events",
+    "eventsText": "Concerts, holidays, sports tournaments, and meetups that bring us together.",
+    "resourcesTitle": "🤝 Resources",
+    "resourcesText": "Find businesses, jobs, immigration resources, organizations, and cultural centers within the Kyrgyz community.",
+    "aboutTitle": "👥 About Us",
+    "aboutText": "Learn about our mission to preserve Kyrgyz identity and empower immigrants."
+  },
+  "community": {
+    "title": "Community",
+    "description": "A glimpse into our culture, traditions, and unity.",
+    "imageAlt": "Kyrgyz community in the USA – events, culture, and togetherness"
+  },
+  "resources": {
+    "title": "Useful Information for Kyrgyz Diaspora in the USA",
+    "medicalTitle": "Medical Insurance (Health Insurance)",
+    "medicalText": "In the USA, health insurance is essential. Without it, treatment can be very expensive. Citizens and residents have access to government and private programs:",
+    "medicalList": {
+      "medicaid": "Medicaid — free insurance for low-income individuals.",
+      "marketplace": "Marketplace Insurance — available at",
+      "emergency": "Emergency Medicaid — for non-immigrants and those awaiting status (e.g., asylum seekers) in emergencies."
+    },
+    "communityCenters": "In major cities, there are Community Health Centers that provide services at reduced cost regardless of status.",
+    "housingTitle": "Housing and Jobs",
+    "housingText": "A list of resources for finding housing, rentals, and jobs in various US cities will appear here soon. We will update this section to help Kyrgyz people living in America.",
+    "housingTemp": "For now, you can use the following sites for housing and job search:",
+    "supportTitle": "Support and Questions",
+    "supportText": "If you have questions for the consulate or suggestions for the community, you can leave them below. We will try to forward them to consulate representatives and Kyrgyz diaspora activists.",
+    "namePlaceholder": "Your name (optional)",
+    "phonePlaceholder": "Your phone (optional)",
+    "questionPlaceholder": "Your question or suggestion...",
+    "submitButton": "Send Question",
+    "successMessage": "Thank you! Your question has been sent.",
+    "errorMessage": "Error sending question"
+  },
+  "eventCard": {
+    "createdBy": "Created by",
+    "statusPending": "Pending Review",
+    "statusApproved": "Approved",
+    "statusRejected": "Rejected"
   }
 }
