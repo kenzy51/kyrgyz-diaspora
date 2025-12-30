@@ -23,13 +23,13 @@ const LanguageSelector = () => {
           style={{ width: "24px", height: "24px" }}
         />
       </Select.Option>
-      <Select.Option value="ru">
+      {/* <Select.Option value="ru">
         <ReactCountryFlag
           countryCode="RU"
           svg
           style={{ width: "24px", height: "24px" }}
         />
-      </Select.Option>
+      </Select.Option> */}
       <Select.Option value="kg">
         <ReactCountryFlag
           countryCode="KG"

@@ -2,7 +2,6 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import en from "./locales/en.json";
-import ru from "./locales/ru.json";
 import kg from "./locales/kg.json";
 const detector = new LanguageDetector();
 detector.addDetector({
@@ -36,9 +35,9 @@ i18n
       kg: {
         translation: kg,
       },
-      ru: {
-        translation: ru,
-      },
+      // ru: {
+      //   translation: ru,
+      // },
     },
   });
 
