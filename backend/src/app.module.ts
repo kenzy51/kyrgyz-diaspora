@@ -7,6 +7,7 @@ import { EventsModule } from "./events/event.module";
 import { UsersModule } from "./users/user.module";
 import { AuthModule } from "./auth/auth.module";
 import { SupportModule } from './support/support.module';
+import { RedisModule } from '@nestjs-modules/ioredis';
 @Module({
   controllers: [AppController],
   providers: [AppService],
@@ -19,7 +20,11 @@ import { SupportModule } from './support/support.module';
     EventsModule,
     UsersModule,
     AuthModule,
-    SupportModule
+    SupportModule,
+    RedisModule.forRoot({
+      type: 'single',
+      url: 'redis://localhost:6379',
+    }),
   ],
 })
 export class AppModule {}
