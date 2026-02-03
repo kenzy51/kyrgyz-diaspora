@@ -6,11 +6,13 @@ import { MongooseModule } from "@nestjs/mongoose";
 import { EventsModule } from "./events/event.module";
 import { UsersModule } from "./users/user.module";
 import { AuthModule } from "./auth/auth.module";
-import { SupportModule } from './support/support.module';
-import { RedisModule } from '@nestjs-modules/ioredis';
+import { SupportModule } from "./support/support.module";
+import { RedisModule } from "@nestjs-modules/ioredis";
+import { ChatController } from "./chat/chat.controller";
+import { ChatService } from "./chat/chat.service";
 @Module({
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, ChatController],
+  providers: [AppService, ChatService],
   imports: [
     ConfigModule.forRoot({
       envFilePath: ".env",
@@ -22,8 +24,8 @@ import { RedisModule } from '@nestjs-modules/ioredis';
     AuthModule,
     SupportModule,
     RedisModule.forRoot({
-      type: 'single',
-      url: 'redis://localhost:6379',
+      type: "single",
+      url: "redis://localhost:6379",
     }),
   ],
 })

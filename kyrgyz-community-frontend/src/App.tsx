@@ -14,6 +14,7 @@ import AuthPage from "./pages/AuthPage";
 import Dashboard from "./pages/Dashboard";
 import { useAuthStore } from "./store/useAuthStore";
 import { useEffect } from "react";
+import DiasporaChat from "./pages/Chat";
 
 function App() {
   const checkAuth = useAuthStore((s) => s.checkAuth);
@@ -36,6 +37,7 @@ function App() {
           <Route path="/donations" element={<Donations />} />
           <Route path="/consulate-info" element={<ConsulateInfo />} />
           <Route path="/auth" element={<AuthPage />} />
+          <Route path="/chat" element={<DiasporaChat />} />
         </Routes>
       </main>
       <Footer />
